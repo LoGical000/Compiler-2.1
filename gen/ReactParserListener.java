@@ -1,4 +1,4 @@
-// Generated from C:/Users/Omar/Desktop/anas/Compiler 2.1/ReactParser.g4 by ANTLR 4.13.1
+// Generated from D:/compiler/Compiler-2.1/ReactParser.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -27,25 +27,15 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitImportStatment(ReactParser.ImportStatmentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#print}.
+	 * Enter a parse tree produced by {@link ReactParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrint(ReactParser.PrintContext ctx);
+	void enterVariableDeclaration(ReactParser.VariableDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#print}.
+	 * Exit a parse tree produced by {@link ReactParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrint(ReactParser.PrintContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#variableDiclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#variableDiclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
+	void exitVariableDeclaration(ReactParser.VariableDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#regularFunction}.
 	 * @param ctx the parse tree
@@ -157,6 +147,16 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitAttributeValue(ReactParser.AttributeValueContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ReactParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint(ReactParser.PrintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint(ReactParser.PrintContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ReactParser#useRef}.
 	 * @param ctx the parse tree
 	 */
@@ -207,15 +207,15 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitUseEffet(ReactParser.UseEffetContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#arrayy}.
+	 * Enter a parse tree produced by {@link ReactParser#array_content}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayy(ReactParser.ArrayyContext ctx);
+	void enterArray_content(ReactParser.Array_contentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#arrayy}.
+	 * Exit a parse tree produced by {@link ReactParser#array_content}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayy(ReactParser.ArrayyContext ctx);
+	void exitArray_content(ReactParser.Array_contentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#map}.
 	 * @param ctx the parse tree

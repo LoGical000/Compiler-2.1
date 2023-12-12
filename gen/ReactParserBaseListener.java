@@ -1,4 +1,4 @@
-// Generated from C:/Users/Omar/Desktop/anas/Compiler 2.1/ReactParser.g4 by ANTLR 4.13.1
+// Generated from D:/compiler/Compiler-2.1/ReactParser.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -40,25 +40,13 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrint(ReactParser.PrintContext ctx) { }
+	@Override public void enterVariableDeclaration(ReactParser.VariableDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrint(ReactParser.PrintContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariableDiclaration(ReactParser.VariableDiclarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariableDiclaration(ReactParser.VariableDiclarationContext ctx) { }
+	@Override public void exitVariableDeclaration(ReactParser.VariableDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -196,6 +184,18 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrint(ReactParser.PrintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint(ReactParser.PrintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterUseRef(ReactParser.UseRefContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -256,13 +256,13 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayy(ReactParser.ArrayyContext ctx) { }
+	@Override public void enterArray_content(ReactParser.Array_contentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayy(ReactParser.ArrayyContext ctx) { }
+	@Override public void exitArray_content(ReactParser.Array_contentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
