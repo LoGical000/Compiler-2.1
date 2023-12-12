@@ -1,4 +1,4 @@
-// Generated from C:/Users/Omar/Desktop/anas/Compiler 2.1/ReactParser.g4 by ANTLR 4.13.1
+// Generated from D:/compiler/Compiler-2.1/ReactParser.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -22,17 +22,11 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImportStatment(ReactParser.ImportStatmentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#print}.
+	 * Visit a parse tree produced by {@link ReactParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrint(ReactParser.PrintContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#variableDiclaration}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
+	T visitVariableDeclaration(ReactParser.VariableDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#regularFunction}.
 	 * @param ctx the parse tree
@@ -100,6 +94,12 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAttributeValue(ReactParser.AttributeValueContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ReactParser#print}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint(ReactParser.PrintContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ReactParser#useRef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -130,11 +130,11 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUseEffet(ReactParser.UseEffetContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#arrayy}.
+	 * Visit a parse tree produced by {@link ReactParser#array_content}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayy(ReactParser.ArrayyContext ctx);
+	T visitArray_content(ReactParser.Array_contentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#map}.
 	 * @param ctx the parse tree

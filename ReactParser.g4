@@ -4,8 +4,9 @@ options {tokenVocab=ReactLexer;}
 
 program : (importStatment)* (regularFunction | variableDeclaration)* export*;
 
-importStatment:
-IMPORT ((USE_STATE | USE_REF | USE_EFFECT |ID | REACT_)  COMMA)* OPEN_CURLY? (USE_STATE | USE_REF | USE_EFFECT | ID | REACT_)( COMMA ID)* CLOSE_CURLY? FROM  STRING SEMI;
+importStatment:IMPORT
+(((USE_STATE | USE_REF | USE_EFFECT |ID | REACT_ | REACTDOM )FROM COMMA)* OPEN_CURLY?
+ (USE_STATE | USE_REF | USE_EFFECT | ID | REACT_ | REACTDOM)( COMMA ID)* CLOSE_CURLY? FROM)?  STRING SEMI;
 
 variableDeclaration : (VAR | CONST | LET) (ID | array_content) EQUAL (callBackFunction | NUMBER | useRef | useState | ID | array_content) SEMI? ;
 

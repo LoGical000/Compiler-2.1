@@ -81,7 +81,7 @@ OPERATION:PLUS|MINUS|PLPL|'--'|PLE|'-='|MULTI|'==';
 HTML_SYNTAX : 'div' |'li' |'p' |'ul' |SIZE_FONT | 'main' | 'BrowserRouter' | 'Switch' | 'Route' | 'img';
 //FUNCTION_NAME : WORD+  ;
 NUMBER:DIGIT+;
-STRING: '\'' (~["])* '\'';
+STRING: '\'' (~['\\])* '\'';
 HEX_NUMBER : '0x' HEX_DIGIT+ | '0X' HEX_DIGIT+ ;
 
 
