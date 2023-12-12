@@ -16,61 +16,25 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterApp(ReactParser.AppContext ctx) { }
+	@Override public void enterProgram(ReactParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitApp(ReactParser.AppContext ctx) { }
+	@Override public void exitProgram(ReactParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExport(ReactParser.ExportContext ctx) { }
+	@Override public void enterImportStatment(ReactParser.ImportStatmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExport(ReactParser.ExportContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterImportR(ReactParser.ImportRContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitImportR(ReactParser.ImportRContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariableDiclaration(ReactParser.VariableDiclarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariableDiclaration(ReactParser.VariableDiclarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterHtml(ReactParser.HtmlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitHtml(ReactParser.HtmlContext ctx) { }
+	@Override public void exitImportStatment(ReactParser.ImportStatmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -88,25 +52,37 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunction1(ReactParser.Function1Context ctx) { }
+	@Override public void enterVariableDiclaration(ReactParser.VariableDiclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunction1(ReactParser.Function1Context ctx) { }
+	@Override public void exitVariableDiclaration(ReactParser.VariableDiclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunction2(ReactParser.Function2Context ctx) { }
+	@Override public void enterRegularFunction(ReactParser.RegularFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunction2(ReactParser.Function2Context ctx) { }
+	@Override public void exitRegularFunction(ReactParser.RegularFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallBackFunction(ReactParser.CallBackFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallBackFunction(ReactParser.CallBackFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -316,6 +292,18 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHtml(ReactParser.HtmlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHtml(ReactParser.HtmlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterHtmlBody(ReactParser.HtmlBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -328,13 +316,13 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHh(ReactParser.HhContext ctx) { }
+	@Override public void enterHtmlhtml(ReactParser.HtmlhtmlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHh(ReactParser.HhContext ctx) { }
+	@Override public void exitHtmlhtml(ReactParser.HtmlhtmlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -347,6 +335,18 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMapMethod(ReactParser.MapMethodContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExport(ReactParser.ExportContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExport(ReactParser.ExportContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -7,55 +7,25 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface ReactParserListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#app}.
+	 * Enter a parse tree produced by {@link ReactParser#program}.
 	 * @param ctx the parse tree
 	 */
-	void enterApp(ReactParser.AppContext ctx);
+	void enterProgram(ReactParser.ProgramContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#app}.
+	 * Exit a parse tree produced by {@link ReactParser#program}.
 	 * @param ctx the parse tree
 	 */
-	void exitApp(ReactParser.AppContext ctx);
+	void exitProgram(ReactParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#export}.
+	 * Enter a parse tree produced by {@link ReactParser#importStatment}.
 	 * @param ctx the parse tree
 	 */
-	void enterExport(ReactParser.ExportContext ctx);
+	void enterImportStatment(ReactParser.ImportStatmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#export}.
+	 * Exit a parse tree produced by {@link ReactParser#importStatment}.
 	 * @param ctx the parse tree
 	 */
-	void exitExport(ReactParser.ExportContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#importR}.
-	 * @param ctx the parse tree
-	 */
-	void enterImportR(ReactParser.ImportRContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#importR}.
-	 * @param ctx the parse tree
-	 */
-	void exitImportR(ReactParser.ImportRContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#variableDiclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#variableDiclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#html}.
-	 * @param ctx the parse tree
-	 */
-	void enterHtml(ReactParser.HtmlContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#html}.
-	 * @param ctx the parse tree
-	 */
-	void exitHtml(ReactParser.HtmlContext ctx);
+	void exitImportStatment(ReactParser.ImportStatmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#print}.
 	 * @param ctx the parse tree
@@ -67,25 +37,35 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitPrint(ReactParser.PrintContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#function1}.
+	 * Enter a parse tree produced by {@link ReactParser#variableDiclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunction1(ReactParser.Function1Context ctx);
+	void enterVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#function1}.
+	 * Exit a parse tree produced by {@link ReactParser#variableDiclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunction1(ReactParser.Function1Context ctx);
+	void exitVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#function2}.
+	 * Enter a parse tree produced by {@link ReactParser#regularFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunction2(ReactParser.Function2Context ctx);
+	void enterRegularFunction(ReactParser.RegularFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#function2}.
+	 * Exit a parse tree produced by {@link ReactParser#regularFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunction2(ReactParser.Function2Context ctx);
+	void exitRegularFunction(ReactParser.RegularFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ReactParser#callBackFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallBackFunction(ReactParser.CallBackFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#callBackFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallBackFunction(ReactParser.CallBackFunctionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#functionbody}.
 	 * @param ctx the parse tree
@@ -257,6 +237,16 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitOnClick(ReactParser.OnClickContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ReactParser#html}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtml(ReactParser.HtmlContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#html}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtml(ReactParser.HtmlContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ReactParser#htmlBody}.
 	 * @param ctx the parse tree
 	 */
@@ -267,15 +257,15 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitHtmlBody(ReactParser.HtmlBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#hh}.
+	 * Enter a parse tree produced by {@link ReactParser#htmlhtml}.
 	 * @param ctx the parse tree
 	 */
-	void enterHh(ReactParser.HhContext ctx);
+	void enterHtmlhtml(ReactParser.HtmlhtmlContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#hh}.
+	 * Exit a parse tree produced by {@link ReactParser#htmlhtml}.
 	 * @param ctx the parse tree
 	 */
-	void exitHh(ReactParser.HhContext ctx);
+	void exitHtmlhtml(ReactParser.HtmlhtmlContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#mapMethod}.
 	 * @param ctx the parse tree
@@ -286,4 +276,14 @@ public interface ReactParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMapMethod(ReactParser.MapMethodContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ReactParser#export}.
+	 * @param ctx the parse tree
+	 */
+	void enterExport(ReactParser.ExportContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#export}.
+	 * @param ctx the parse tree
+	 */
+	void exitExport(ReactParser.ExportContext ctx);
 }

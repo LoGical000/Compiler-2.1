@@ -10,35 +10,17 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#app}.
+	 * Visit a parse tree produced by {@link ReactParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitApp(ReactParser.AppContext ctx);
+	T visitProgram(ReactParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#export}.
+	 * Visit a parse tree produced by {@link ReactParser#importStatment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExport(ReactParser.ExportContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#importR}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImportR(ReactParser.ImportRContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#variableDiclaration}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#html}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitHtml(ReactParser.HtmlContext ctx);
+	T visitImportStatment(ReactParser.ImportStatmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#print}.
 	 * @param ctx the parse tree
@@ -46,17 +28,23 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrint(ReactParser.PrintContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#function1}.
+	 * Visit a parse tree produced by {@link ReactParser#variableDiclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction1(ReactParser.Function1Context ctx);
+	T visitVariableDiclaration(ReactParser.VariableDiclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#function2}.
+	 * Visit a parse tree produced by {@link ReactParser#regularFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction2(ReactParser.Function2Context ctx);
+	T visitRegularFunction(ReactParser.RegularFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ReactParser#callBackFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallBackFunction(ReactParser.CallBackFunctionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#functionbody}.
 	 * @param ctx the parse tree
@@ -160,21 +148,33 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOnClick(ReactParser.OnClickContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ReactParser#html}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtml(ReactParser.HtmlContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ReactParser#htmlBody}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitHtmlBody(ReactParser.HtmlBodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#hh}.
+	 * Visit a parse tree produced by {@link ReactParser#htmlhtml}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHh(ReactParser.HhContext ctx);
+	T visitHtmlhtml(ReactParser.HtmlhtmlContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#mapMethod}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMapMethod(ReactParser.MapMethodContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ReactParser#export}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExport(ReactParser.ExportContext ctx);
 }

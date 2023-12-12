@@ -25,7 +25,7 @@ COMMENT: '//' ~[\r\n]*;
 TYPE: 'type';
 DATATYPE_:'string' |'number';
 REACT_:'React' ;
-CREATEELEMENT : 'createElement';
+CREATE_ELEMENT : 'createElement';
 REACTDOM: 'ReactDOM';
 USE_STATE:'useState';
 USE_EFFECT:'useEffect';
@@ -78,7 +78,7 @@ S_C: '\'' ;
 D_C : '"';
 
 OPERATION:PLUS|MINUS|PLPL|'--'|PLE|'-='|MULTI|'==';
-SYNTAX : 'div' |'li' |'p' |'ul' |SIZE_FONT | 'main' | 'BrowserRouter' | 'Switch' | 'Route' | 'img';
+HTML_SYNTAX : 'div' |'li' |'p' |'ul' |SIZE_FONT | 'main' | 'BrowserRouter' | 'Switch' | 'Route' | 'img';
 //FUNCTION_NAME : WORD+  ;
 NUMBER:DIGIT+;
 STRING: '\'' (~["])* '\'';
