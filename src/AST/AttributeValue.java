@@ -1,8 +1,8 @@
 package AST;
 
-public class attributeValue {
+public class AttributeValue {
 
-   String id;
+   private String id;
 
     public String getId() {
         return id;
@@ -12,7 +12,7 @@ public class attributeValue {
         this.id = id;
     }
 
-    public attributeValue(String id) {
+    public AttributeValue(String id) {
         this.id = id;
     }
 
