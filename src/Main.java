@@ -1,4 +1,3 @@
-
 import AST.Program;
 import Visitor.BaseVisitor;
 import gen.ReactLexer;
@@ -13,15 +12,14 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String source="samples/samples.txt";
+        String source="src/test.txt";
         CharStream cs=fromFileName(source);
-        ReactLexer lexer= new ReactLexer(cs);
-//        CommonTokenStream tokenStream=new CommonTokenStream(lexer);
-//        ReactParser parser= new ReactParser(tokenStream);
-//        ParseTree tree =parser.program();
-//        Program doc=(Program) new BaseVisitor().visit(tree);
-//        System.out.println("\n\n\n\n\n");
-//        System.out.println(doc);
+        ReactLexer lexer = new ReactLexer(cs);
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+        ReactParser parser= new ReactParser(tokenStream);
+        ParseTree tree =parser.program();
+        Program doc=(Program) new BaseVisitor().visit(tree);
+        System.out.println("\n\n\n");
+        System.out.println(doc);
     }
-
 }

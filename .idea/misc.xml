@@ -6,10 +6,10 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/ReactParser.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="C:\Users\Omar\Desktop\anas\Compiler 2.1\gen" />
+          <option name="outputDir" value="C:\Users\anast\OneDrive\Desktop\COMPILER X\Compiler-2.1\src" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
-          <option name="pkg" value="" />
+          <option name="pkg" value="gen" />
           <option name="language" value="" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>

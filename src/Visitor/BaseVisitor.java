@@ -81,6 +81,49 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     @Override
     public FunctionBody visitFunctionbody(ReactParser.FunctionbodyContext ctx) {
         FunctionBody functionBody = new FunctionBody();
+        for (int i=0;i<ctx.variableDeclaration().size();i++) {
+            if(ctx.variableDeclaration(i)!=null)
+            {
+                functionBody.getVariableDeclarationList().add(visitVariableDeclaration(ctx.variableDeclaration(i)));
+            }
+        }
+        for (int i=0;i<ctx.print().size();i++) {
+            if(ctx.print(i)!=null)
+            {
+                functionBody.getPrintList().add(visitPrint(ctx.print(i)));
+            }
+        }
+        for (int i=0;i<ctx.callFun().size();i++) {
+            if(ctx.callFun(i)!=null)
+            {
+                functionBody.getCallFunList().add(visitCallFun(ctx.callFun(i)));
+            }
+        }
+        if(ctx.returnStatment()!=null){
+            functionBody.setReturnStatement(visitReturnStatment(ctx.returnStatment()));
+        }
         return functionBody;
+    }
+
+    @Override
+    public CallFun visitCallFun(ReactParser.CallFunContext ctx) {
+        CallFun callFun = new CallFun();
+        return callFun;
+    }
+
+    @Override
+    public Print visitPrint(ReactParser.PrintContext ctx) {
+        Print print = new Print();
+        for(int i=0;i<ctx.SingleLineString().size();i++){
+            if(ctx.SingleLineString(i)!=null)
+                print.getArguments().add(ctx.SingleLineString(i).getText());
+        }
+        return print;
+    }
+
+    @Override
+    public ReturnStatement visitReturnStatment(ReactParser.ReturnStatmentContext ctx) {
+        ReturnStatement returnStatement = new ReturnStatement();
+        return returnStatement;
     }
 }

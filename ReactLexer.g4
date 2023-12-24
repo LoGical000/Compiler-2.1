@@ -1,6 +1,6 @@
 lexer grammar ReactLexer;
 
-options { superClass=ReactLexer; }
+options { superClass=org.antlr.v4.runtime.Lexer; }
 
 EXPENSES:'expenses';
 CONST: 'const';
@@ -89,10 +89,11 @@ HEX_NUMBER : '0x' HEX_DIGIT+ | '0X' HEX_DIGIT+ ;
 fragment DIGIT : '0' .. '9' ;
 SingleLineString : StringDQ | StringSQ | 'r\'' (~('\'' | '\n' | '\r'))* '\'' | 'r"' (~('"' | '\n' | '\r'))* '"' ;
 MultiLineString : '"""' StringContentTDQ*? '"""' | '\'\'\'' StringContentTSQ*? '\'\'\'' | 'r"""' (~'"' | '"' ~'"' | '""' ~'"')* '"""' | 'r\'\'\'' (~'\'' | '\'' ~'\'' | '\'\'' ~'\'')* '\'\'\'' ;
-fragment StringDQ : '"' StringContentDQ*? '"' ;
-fragment StringContentDQ : ~('\\' | '"' | '\n' | '\r' | '$') | '\\' ~('\n' | '\r') | StringDQ | '${' StringContentDQ*? '}' | '$' { CheckNotOpenBrace() }? ;
+fragment StringDQ : '"' StringContentDQ*? '"';
+fragment StringContentDQ : ~('\\' | '"' | '\n' | '\r' | '$') | '\\' ~('\n' | '\r') | StringDQ | '${' StringContentDQ*? '}' | '$';
+
 fragment StringSQ : '\'' StringContentSQ*? '\'' ;
-fragment StringContentSQ : ~('\\' | '\'' | '\n' | '\r' | '$') | '\\' ~('\n' | '\r') | StringSQ | '${' StringContentSQ*? '}' | '$' { CheckNotOpenBrace() }? ;
+fragment StringContentSQ : ~('\\' | '\'' | '\n' | '\r' | '$') | '\\' ~('\n' | '\r') | StringSQ | '${' StringContentSQ*? '}' | '$';
 fragment StringContentTDQ : ~('\\' | '"') | '"' ~'"' | '""' ~'"' ;
 fragment StringContentTSQ : '\'' ~'\'' | '\'\'' ~'\'' | . ;
 fragment HEX_DIGIT : 'a' .. 'f' | 'A' .. 'F' | DIGIT ;

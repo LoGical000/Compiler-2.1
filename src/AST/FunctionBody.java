@@ -46,10 +46,10 @@ public class FunctionBody {
     @Override
     public String toString() {
         return "FunctionBody{" +
-                "variableDeclarationList=" + variableDeclarationList +
-                ", printList=" + printList +
-                ", callFunList=" + callFunList +
-                ", returnStatement=" + returnStatement +
-                '}';
+                "\n variableDeclarationList=" + variableDeclarationList +
+                "\n, printList=" + printList +
+                "\n, callFunList=" + callFunList +
+                "\n, returnStatement=" + returnStatement +
+                "\n }";
     }
 }
