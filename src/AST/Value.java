@@ -2,10 +2,10 @@ package AST;
 
 public class Value {
     String string;
-    Boolean aBoolean;
+    String aBoolean;
     String aNull;
-    Double aDouble;
-    Integer integer;
+    String aDouble;
+    String integer;
 
     public String getString() {
         return string;
@@ -15,11 +15,11 @@ public class Value {
         this.string = string;
     }
 
-    public Boolean getaBoolean() {
+    public String getaBoolean() {
         return aBoolean;
     }
 
-    public void setaBoolean(Boolean aBoolean) {
+    public void setaBoolean(String aBoolean) {
         this.aBoolean = aBoolean;
     }
 
@@ -31,19 +31,19 @@ public class Value {
         this.aNull = aNull;
     }
 
-    public Double getaDouble() {
+    public String getaDouble() {
         return aDouble;
     }
 
-    public void setaDouble(Double aDouble) {
+    public void setaDouble(String aDouble) {
         this.aDouble = aDouble;
     }
 
-    public Integer getInteger() {
+    public String getInteger() {
         return integer;
     }
 
-    public void setInteger(Integer integer) {
+    public void setInteger(String integer) {
         this.integer = integer;
     }
 

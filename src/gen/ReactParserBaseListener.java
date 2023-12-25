@@ -137,13 +137,13 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCallFun(ReactParser.CallFunContext ctx) { }
+	@Override public void enterCallFunc(ReactParser.CallFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCallFun(ReactParser.CallFunContext ctx) { }
+	@Override public void exitCallFunc(ReactParser.CallFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -353,13 +353,13 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValues(ReactParser.ValuesContext ctx) { }
+	@Override public void enterValue(ReactParser.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValues(ReactParser.ValuesContext ctx) { }
+	@Override public void exitValue(ReactParser.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -377,13 +377,37 @@ public class ReactParserBaseListener implements ReactParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRow(ReactParser.RowContext ctx) { }
+	@Override public void enterArrayObjects(ReactParser.ArrayObjectsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRow(ReactParser.RowContext ctx) { }
+	@Override public void exitArrayObjects(ReactParser.ArrayObjectsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayValues(ReactParser.ArrayValuesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayValues(ReactParser.ArrayValuesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterObject(ReactParser.ObjectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitObject(ReactParser.ObjectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

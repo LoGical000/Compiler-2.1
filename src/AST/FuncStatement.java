@@ -67,14 +67,34 @@ public class FuncStatement {
 
     @Override
     public String toString() {
-        return "FuncStatement{" +
-                "useState=" + useState +
-                ", useRef=" + useRef +
-                ", useEffect=" + useEffect +
-                ", variableDeclaration=" + variableDeclaration +
-                ", print=" + print +
-                ", callFunc=" + callFunc +
-                ", jsxElement=" + jsxElement +
-                '}';
+        if(useState!=null)
+            return "FuncStatement{" +
+                    " useState=" + useState +
+                    "}";
+        else if(useEffect!=null)
+            return "FuncStatement{" +
+                    " useEffect=" + useEffect +
+                    "}";
+        else if(useRef!=null)
+            return "FuncStatement{" +
+                    " useRef=" + useRef +
+                    "}";
+        else if(variableDeclaration!=null)
+            return "FuncStatement{" +
+                    " variableDeclaration=" + variableDeclaration +
+                    "}";
+        else if(callFunc!=null)
+            return "FuncStatement{" +
+                    " callFunc=" + callFunc +
+                    "}";
+        else if(print!=null)
+            return "FuncStatement{" +
+                    " print=" + print +
+                    "}";
+        else
+            return "FuncStatement{" +
+                    " jsxElement=" + jsxElement +
+                    "}";
+
     }
 }

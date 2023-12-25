@@ -108,15 +108,15 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitFuncStatement(ReactParser.FuncStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#callFun}.
+	 * Enter a parse tree produced by {@link ReactParser#callFunc}.
 	 * @param ctx the parse tree
 	 */
-	void enterCallFun(ReactParser.CallFunContext ctx);
+	void enterCallFunc(ReactParser.CallFuncContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#callFun}.
+	 * Exit a parse tree produced by {@link ReactParser#callFunc}.
 	 * @param ctx the parse tree
 	 */
-	void exitCallFun(ReactParser.CallFunContext ctx);
+	void exitCallFunc(ReactParser.CallFuncContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#returnStatement}.
 	 * @param ctx the parse tree
@@ -288,15 +288,15 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitShortIf(ReactParser.ShortIfContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#values}.
+	 * Enter a parse tree produced by {@link ReactParser#value}.
 	 * @param ctx the parse tree
 	 */
-	void enterValues(ReactParser.ValuesContext ctx);
+	void enterValue(ReactParser.ValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#values}.
+	 * Exit a parse tree produced by {@link ReactParser#value}.
 	 * @param ctx the parse tree
 	 */
-	void exitValues(ReactParser.ValuesContext ctx);
+	void exitValue(ReactParser.ValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#array}.
 	 * @param ctx the parse tree
@@ -308,15 +308,35 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitArray(ReactParser.ArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#row}.
+	 * Enter a parse tree produced by {@link ReactParser#arrayObjects}.
 	 * @param ctx the parse tree
 	 */
-	void enterRow(ReactParser.RowContext ctx);
+	void enterArrayObjects(ReactParser.ArrayObjectsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ReactParser#row}.
+	 * Exit a parse tree produced by {@link ReactParser#arrayObjects}.
 	 * @param ctx the parse tree
 	 */
-	void exitRow(ReactParser.RowContext ctx);
+	void exitArrayObjects(ReactParser.ArrayObjectsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ReactParser#arrayValues}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayValues(ReactParser.ArrayValuesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#arrayValues}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayValues(ReactParser.ArrayValuesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ReactParser#object}.
+	 * @param ctx the parse tree
+	 */
+	void enterObject(ReactParser.ObjectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#object}.
+	 * @param ctx the parse tree
+	 */
+	void exitObject(ReactParser.ObjectContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#element}.
 	 * @param ctx the parse tree

@@ -71,11 +71,11 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFuncStatement(ReactParser.FuncStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#callFun}.
+	 * Visit a parse tree produced by {@link ReactParser#callFunc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCallFun(ReactParser.CallFunContext ctx);
+	T visitCallFunc(ReactParser.CallFuncContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#returnStatement}.
 	 * @param ctx the parse tree
@@ -179,11 +179,11 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitShortIf(ReactParser.ShortIfContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#values}.
+	 * Visit a parse tree produced by {@link ReactParser#value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValues(ReactParser.ValuesContext ctx);
+	T visitValue(ReactParser.ValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#array}.
 	 * @param ctx the parse tree
@@ -191,11 +191,23 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArray(ReactParser.ArrayContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#row}.
+	 * Visit a parse tree produced by {@link ReactParser#arrayObjects}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRow(ReactParser.RowContext ctx);
+	T visitArrayObjects(ReactParser.ArrayObjectsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ReactParser#arrayValues}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayValues(ReactParser.ArrayValuesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ReactParser#object}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObject(ReactParser.ObjectContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#element}.
 	 * @param ctx the parse tree
