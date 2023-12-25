@@ -1,20 +1,20 @@
 package AST;
 
 public class Export {
-    private String Id;
+    String id;
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "\n Export{" +
-                "\n Id='" + Id + '\'' +
-                "\n }";
+        return "Export{" +
+                "\nid='" + id + '\'' +
+                "\n}";
     }
 }

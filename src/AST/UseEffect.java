@@ -1,8 +1,11 @@
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UseEffect {
-    private CallBackFunction callBackFunction;
-    private ArrayContent arrayContent;
+    CallBackFunction callBackFunction;
+    List<String> ids = new ArrayList<>();
 
     public CallBackFunction getCallBackFunction() {
         return callBackFunction;
@@ -12,19 +15,19 @@ public class UseEffect {
         this.callBackFunction = callBackFunction;
     }
 
-    public ArrayContent getArrayContent() {
-        return arrayContent;
+    public List<String> getIds() {
+        return ids;
     }
 
-    public void setArrayContent(ArrayContent arrayContent) {
-        this.arrayContent = arrayContent;
+    public void setIds(List<String> ids) {
+        this.ids = ids;
     }
 
     @Override
     public String toString() {
         return "UseEffect{" +
                 "callBackFunction=" + callBackFunction +
-                ", arrayContent=" + arrayContent +
+                ", ids=" + ids +
                 '}';
     }
 }

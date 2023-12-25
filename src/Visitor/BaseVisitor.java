@@ -10,10 +10,10 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     @Override
     public Program visitProgram(ReactParser.ProgramContext ctx) {
         Program program = new Program();
-        for (int i=0;i<ctx.importStatment().size();i++) {
-            if(ctx.importStatment(i)!=null)
+        for (int i=0;i<ctx.importStatement().size();i++) {
+            if(ctx.importStatement(i)!=null)
             {
-                program.getImportStatementList().add(visitImportStatment(ctx.importStatment(i)));
+                program.getImportStatementList().add(visitImportStatement(ctx.importStatement(i)));
             }
         }
         for (int i=0;i<ctx.variableDeclaration().size();i++) {
@@ -22,25 +22,20 @@ public class BaseVisitor extends ReactParserBaseVisitor {
                 program.getVariableDeclarationList().add(visitVariableDeclaration(ctx.variableDeclaration(i)));
             }
         }
-        for (int i=0;i<ctx.regularFunction().size();i++) {
-            if(ctx.regularFunction(i)!=null)
+        for (int i=0;i<ctx.functionDeclaration().size();i++) {
+            if(ctx.functionDeclaration(i)!=null)
             {
-                program.getRegularFunctionList().add(visitRegularFunction(ctx.regularFunction(i)));
+                program.getFunctionDeclarationList().add(visitFunctionDeclaration(ctx.functionDeclaration(i)));
             }
         }
-        for (int i=0;i<ctx.export().size();i++) {
-            if(ctx.export(i)!=null)
-            {
-                program.getExportList().add(visitExport(ctx.export(i)));
-            }
-        }
+        program.setExport(visitExport(ctx.export()));
         return program;
 
     }
 
     ///IMPORT
     @Override
-    public ImportStatement visitImportStatment(ReactParser.ImportStatmentContext ctx) {
+    public ImportStatement visitImportStatement(ReactParser.ImportStatementContext ctx) {
         ImportStatement importStatement=new ImportStatement();
         return importStatement;
     }
@@ -53,77 +48,93 @@ public class BaseVisitor extends ReactParserBaseVisitor {
 
     }
 
+    ///FUNCTION DECLARATION
+    @Override
+    public FunctionDeclaration visitFunctionDeclaration(ReactParser.FunctionDeclarationContext ctx) {
+        FunctionDeclaration functionDeclaration=new FunctionDeclaration();
+        if (ctx.regularFunction()!=null)
+            functionDeclaration.setRegularFunction(visitRegularFunction(ctx.regularFunction()));
+        if (ctx.callBackFunction()!=null)
+            functionDeclaration.setCallBackFunction(visitCallBackFunction(ctx.callBackFunction()));
+
+        return functionDeclaration;
+    }
 
     ///REGULAR FUNCTION
     @Override
     public RegularFunction visitRegularFunction(ReactParser.RegularFunctionContext ctx) {
         RegularFunction regularFunction = new RegularFunction();
-        regularFunction.setFunctionName(ctx.ID(0).getText());
 
-        for (int i=1;i<ctx.ID().size();i++){
-            if (ctx.ID(i)!=null)
-                regularFunction.getParameterList().add(ctx.ID(i).getText());
-        }
-        regularFunction.setBody(visitFunctionbody(ctx.functionbody()));
+        regularFunction.setFunctionName(ctx.ID().getText());
+        if (ctx.parameters()!=null)
+            regularFunction.setParameters(visitParameters(ctx.parameters()));
+      //  regularFunction.setFunctionBody(visitFunctionbody(ctx.functionbody()));
 
         return regularFunction;
+    }
+    ///CALLBACK FUNCTION
+    @Override
+    public CallBackFunction visitCallBackFunction(ReactParser.CallBackFunctionContext ctx) {
+        CallBackFunction callBackFunction = new CallBackFunction();
 
+        if (ctx.parameters()!=null)
+            callBackFunction.setParameters(visitParameters(ctx.parameters()));
+      //  callBackFunction.setFunctionBody(visitFunctionbody(ctx.functionbody()));
+
+        return callBackFunction;
     }
 
     ///EXPORT
     @Override
     public Export visitExport(ReactParser.ExportContext ctx) {
         Export export=new Export();
+        export.setId(ctx.ID().getText());
         return export;
 
     }
-
+    ///PARAMETERS
     @Override
-    public FunctionBody visitFunctionbody(ReactParser.FunctionbodyContext ctx) {
-        FunctionBody functionBody = new FunctionBody();
-        for (int i=0;i<ctx.variableDeclaration().size();i++) {
-            if(ctx.variableDeclaration(i)!=null)
+    public Parameters visitParameters(ReactParser.ParametersContext ctx) {
+        Parameters parameters = new Parameters();
+        for (int i=0;i<ctx.ID().size();i++) {
+            if(ctx.ID(i)!=null)
             {
-                functionBody.getVariableDeclarationList().add(visitVariableDeclaration(ctx.variableDeclaration(i)));
+                parameters.getIds().add(ctx.ID(i).getText());
             }
         }
-        for (int i=0;i<ctx.print().size();i++) {
-            if(ctx.print(i)!=null)
-            {
-                functionBody.getPrintList().add(visitPrint(ctx.print(i)));
-            }
-        }
-        for (int i=0;i<ctx.callFun().size();i++) {
-            if(ctx.callFun(i)!=null)
-            {
-                functionBody.getCallFunList().add(visitCallFun(ctx.callFun(i)));
-            }
-        }
-        if(ctx.returnStatment()!=null){
-            functionBody.setReturnStatement(visitReturnStatment(ctx.returnStatment()));
-        }
-        return functionBody;
+        return parameters;
+
     }
 
-    @Override
-    public CallFun visitCallFun(ReactParser.CallFunContext ctx) {
-        CallFun callFun = new CallFun();
-        return callFun;
-    }
+//    ///FUNCTION BODY
+//    @Override
+//    public FunctionBody visitFunctionbody(ReactParser.FunctionbodyContext ctx) {
+//        FunctionBody functionBody = new FunctionBody();
+//        if(ctx.returnStatement()!=null){
+//            functionBody.setReturnStatement(visitReturnStatement(ctx.returnStatement()));
+//        }
+//        return functionBody;
+//    }
+//
+//    @Override
+//    public CallFun visitCallFun(ReactParser.CallFunContext ctx) {
+//        CallFun callFun = new CallFun();
+//        return callFun;
+//    }
+//
+//    @Override
+//    public Print visitPrint(ReactParser.PrintContext ctx) {
+//        Print print = new Print();
+//        for(int i=0;i<ctx.SingleLineString().size();i++){
+//            if(ctx.SingleLineString(i)!=null)
+//                print.getArguments().add(ctx.SingleLineString(i).getText());
+//        }
+//        return print;
+//    }
 
-    @Override
-    public Print visitPrint(ReactParser.PrintContext ctx) {
-        Print print = new Print();
-        for(int i=0;i<ctx.SingleLineString().size();i++){
-            if(ctx.SingleLineString(i)!=null)
-                print.getArguments().add(ctx.SingleLineString(i).getText());
-        }
-        return print;
-    }
-
-    @Override
-    public ReturnStatement visitReturnStatment(ReactParser.ReturnStatmentContext ctx) {
-        ReturnStatement returnStatement = new ReturnStatement();
-        return returnStatement;
-    }
+//    @Override
+//    public ReturnStatement visitReturnStatement(ReactParser.ReturnStatementContext ctx) {
+//        ReturnStatement returnStatement = new ReturnStatement();
+//        return returnStatement;
+//    }
 }

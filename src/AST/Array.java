@@ -1,40 +1,30 @@
 package AST;
 
 public class Array {
-    private String type;
-    private ArrayContent arrayContent;
-    private UseState useState;
+    ArrayObjects arrayObjects;
+    ArrayValues arrayValues;
 
-    public String getType() {
-        return type;
+    public ArrayObjects getArrayObjects() {
+        return arrayObjects;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setArrayObjects(ArrayObjects arrayObjects) {
+        this.arrayObjects = arrayObjects;
     }
 
-    public ArrayContent getArrayContent() {
-        return arrayContent;
+    public ArrayValues getArrayValues() {
+        return arrayValues;
     }
 
-    public void setArrayContent(ArrayContent arrayContent) {
-        this.arrayContent = arrayContent;
-    }
-
-    public UseState getUseState() {
-        return useState;
-    }
-
-    public void setUseState(UseState useState) {
-        this.useState = useState;
+    public void setArrayValues(ArrayValues arrayValues) {
+        this.arrayValues = arrayValues;
     }
 
     @Override
     public String toString() {
         return "Array{" +
-                "type='" + type + '\'' +
-                ", arrayContent=" + arrayContent +
-                ", useState=" + useState +
+                "arrayObjects=" + arrayObjects +
+                ", arrayValues=" + arrayValues +
                 '}';
     }
 }

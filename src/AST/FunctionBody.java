@@ -1,38 +1,18 @@
 package AST;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionBody {
-    List<VariableDeclaration> variableDeclarationList = new ArrayList<>();
-    List<Print> printList = new ArrayList<>();
-    List<CallFun> callFunList = new ArrayList<>();
+    List<FuncStatement> funcStatementList= new ArrayList<>();
     ReturnStatement returnStatement;
 
-    public List<VariableDeclaration> getVariableDeclarationList() {
-        return variableDeclarationList;
+    public List<FuncStatement> getFuncStatementList() {
+        return funcStatementList;
     }
 
-    public void setVariableDeclarationList(List<VariableDeclaration> variableDeclarationList) {
-        this.variableDeclarationList = variableDeclarationList;
-    }
-
-    public List<Print> getPrintList() {
-        return printList;
-    }
-
-    public void setPrintList(List<Print> printList) {
-        this.printList = printList;
-    }
-
-    public List<CallFun> getCallFunList() {
-        return callFunList;
-    }
-
-    public void setCallFunList(List<CallFun> callFunList) {
-        this.callFunList = callFunList;
+    public void setFuncStatementList(List<FuncStatement> funcStatementList) {
+        this.funcStatementList = funcStatementList;
     }
 
     public ReturnStatement getReturnStatement() {
@@ -46,10 +26,8 @@ public class FunctionBody {
     @Override
     public String toString() {
         return "FunctionBody{" +
-                "\n variableDeclarationList=" + variableDeclarationList +
-                "\n, printList=" + printList +
-                "\n, callFunList=" + callFunList +
-                "\n, returnStatement=" + returnStatement +
+                "\n funcStatementList=" + funcStatementList +
+                "\n returnStatement=" + returnStatement +
                 "\n }";
     }
 }

@@ -1,14 +1,9 @@
 package AST;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class RegularFunction extends ASTNode {
-    private String functionName;
-    private List<String> parameterList = new ArrayList<>();
-    private FunctionBody body ;
-
-    // Constructors, getters, and setters
+public class RegularFunction {
+    String functionName;
+    Parameters parameters;
+    FunctionBody functionBody;
 
     public String getFunctionName() {
         return functionName;
@@ -18,28 +13,28 @@ public class RegularFunction extends ASTNode {
         this.functionName = functionName;
     }
 
-    public List<String> getParameterList() {
-        return parameterList;
+    public Parameters getParameters() {
+        return parameters;
     }
 
-    public void setParameterList(List<String> parameterList) {
-        this.parameterList = parameterList;
+    public void setParameters(Parameters parameters) {
+        this.parameters = parameters;
     }
 
-    public FunctionBody getBody() {
-        return body;
+    public FunctionBody getFunctionBody() {
+        return functionBody;
     }
 
-    public void setBody(FunctionBody body) {
-        this.body = body;
+    public void setFunctionBody(FunctionBody functionBody) {
+        this.functionBody = functionBody;
     }
 
     @Override
     public String toString() {
         return "RegularFunction{" +
                 "\n functionName='" + functionName + '\'' +
-                "\n , parameterList=" + parameterList +
-                "\n , body=" + body +
+                "\n parameters=" + parameters +
+                "\n functionBody=" + functionBody +
                 "\n }";
     }
 }

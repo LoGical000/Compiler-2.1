@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Print {
+    List<String> strings = new ArrayList<>();
 
-    List<String> arguments = new ArrayList<>();
-
-    public List<String> getArguments() {
-        return arguments;
+    public List<String> getStrings() {
+        return strings;
     }
 
-    public void setArguments(List<String> arguments) {
-        this.arguments = arguments;
+    public void setStrings(List<String> strings) {
+        this.strings = strings;
     }
 
     @Override
     public String toString() {
         return "Print{" +
-                "arguments=" + arguments +
-                '}';
+                "\nstrings=" + strings +
+                "\n}";
     }
 }

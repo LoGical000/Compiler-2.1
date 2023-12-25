@@ -1,33 +1,30 @@
 package AST;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CallBackFunction {
-    List<String> arguments = new ArrayList<>();
-    private FunctionBody body ;
+    Parameters parameters;
+    FunctionBody functionBody;
 
-    public List<String> getArguments() {
-        return arguments;
+    public Parameters getParameters() {
+        return parameters;
     }
 
-    public void setArguments(List<String> arguments) {
-        this.arguments = arguments;
+    public void setParameters(Parameters parameters) {
+        this.parameters = parameters;
     }
 
-    public FunctionBody getBody() {
-        return body;
+    public FunctionBody getFunctionBody() {
+        return functionBody;
     }
 
-    public void setBody(FunctionBody body) {
-        this.body = body;
+    public void setFunctionBody(FunctionBody functionBody) {
+        this.functionBody = functionBody;
     }
 
     @Override
     public String toString() {
         return "CallBackFunction{" +
-                "arguments=" + arguments +
-                ", body=" + body +
-                '}';
+                "\n parameters=" + parameters +
+                "\n functionBody=" + functionBody +
+                "\n}";
     }
 }

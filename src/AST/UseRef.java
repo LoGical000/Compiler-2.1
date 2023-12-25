@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UseRef {
-    List<String> strings = new ArrayList<>();
+    List<String> strings= new ArrayList<>();
 
     public List<String> getStrings() {
         return strings;
@@ -17,7 +17,7 @@ public class UseRef {
     @Override
     public String toString() {
         return "UseRef{" +
-                "strings=" + strings +
-                '}';
+                "\n strings=" + strings +
+                "\n}";
     }
 }

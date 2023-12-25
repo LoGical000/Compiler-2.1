@@ -1,30 +1,23 @@
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReturnStatement {
-    private PureReact pureReact;
-    private Html html;
+    List<JSXElement> jsxElementList = new ArrayList<>();
 
-    public PureReact getPureReact() {
-        return pureReact;
+    public List<JSXElement> getJsxElementList() {
+        return jsxElementList;
     }
 
-    public void setPureReact(PureReact pureReact) {
-        this.pureReact = pureReact;
-    }
-
-    public Html getHtml() {
-        return html;
-    }
-
-    public void setHtml(Html html) {
-        this.html = html;
+    public void setJsxElementList(List<JSXElement> jsxElementList) {
+        this.jsxElementList = jsxElementList;
     }
 
     @Override
     public String toString() {
         return "ReturnStatement{" +
-                "pureReact=" + pureReact +
-                ", html=" + html +
-                '}';
+                "\n jsxElementList=" + jsxElementList +
+                "\n}";
     }
 }

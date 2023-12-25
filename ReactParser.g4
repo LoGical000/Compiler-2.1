@@ -1,66 +1,90 @@
 parser grammar ReactParser ;
 
 options {tokenVocab=ReactLexer;}
+//PROGRAM
+program : (importStatement)* (functionDeclaration | variableDeclaration)* export?;
 
-program : (importStatment)* (regularFunction | variableDeclaration)* export*;
-
-importStatment:IMPORT
-(((USE_STATE | USE_REF | USE_EFFECT |ID | REACT_ | REACTDOM )FROM COMMA)* OPEN_CURLY?
- (USE_STATE | USE_REF | USE_EFFECT | ID | REACT_ | REACTDOM)( COMMA ID)* CLOSE_CURLY? FROM)?  STRING SEMI;
-
-variableDeclaration : (VAR | CONST | LET) (ID | array_content) EQUAL (callBackFunction | NUMBER | useRef | useState | ID | array_content) SEMI? ;
-
-regularFunction : FUNCTION ID OPEN_PAREN (ID COMMA?)* CLOSE_PAREN OPEN_CURLY functionbody CLOSE_CURLY ;
-
-callBackFunction : OPEN_PAREN (ID COMMA?)*  CLOSE_PAREN ARROW OPEN_CURLY? functionbody CLOSE_CURLY? ;
-
-functionbody : (variableDeclaration | print | callFun )* returnStatment? ;
-
-callFun: ID OPEN_PAREN (ID COMMA?)* CLOSE_PAREN SEMI ;
-
-returnStatment : returnStatment1 | RETURN pureReact;
-
-returnStatment1 : RETURN OPEN_PAREN html? CLOSE_PAREN SEMI ;
-
-syntax: S_C HTML_SYNTAX S_C ;
-
-pureReact : REACT_ DOT CREATE_ELEMENT OPEN_PAREN
-(STRING | ID) COMMA attributes COMMA?
-((pureReact | SingleLineString)* COMMA?)? CLOSE_PAREN (SEMI | COMMA);
-
-attributes: OPEN_CURLY (attribute COMMA)* CLOSE_CURLY;
-
-attribute: ID COLON attributeValue;
-
-attributeValue: SingleLineString
-              | NUMBER
-              | ID;
-
-print : CONSOLE_ DOT LOG_ OPEN_PAREN (ID | SingleLineString  | NUMBER)* CLOSE_PAREN SEMI ;
-
-useRef : USE_REF OPEN_PAREN (STRING)* CLOSE_PAREN ;
-
-useState : USE_STATE OPEN_PAREN (ID DOT ID | ID) CLOSE_PAREN ;
-
-array : (VAR | CONST | LET) array_content EQUAL useState SEMI ;
-
-functionCall : ID OPEN_PAREN (STRING)? CLOSE_PAREN ;
-
-useEffet : USE_EFFECT OPEN_PAREN callBackFunction COMMA  array_content CLOSE_PAREN ;
-
-array_content : OPEN_SQUARE ((ID | STRING | map) COMMA?)* CLOSE_SQUARE ;
-
-map: OPEN_CURLY (ID COLON (attributeValue | DOLLAR OPEN_CURLY (SingleLineString | ID) CLOSE_CURLY | array_content) COMMA?)* CLOSE_CURLY ;
-
-onClick: OPEN_CURLY callBackFunction CLOSE_CURLY ;
-
-html: JSX_OPEN (HTML_SYNTAX) (ID)? ((ID | CLASS_NAME) EQUAL OPEN_CURLY? (attributeValue | ID DOT ID | onClick) CLOSE_CURLY?)* JSX_SLASH? JSX_CLOSE
-((htmlBody |html* | OPEN_CURLY? (ID* | ID DOT ID) CLOSE_CURLY?) (JSX_OPEN JSX_SLASH HTML_SYNTAX JSX_CLOSE ))?;
-
-htmlBody : OPEN_CURLY (mapMethod | htmlhtml) CLOSE_CURLY;
-
-htmlhtml : ID AND OPEN_PAREN html CLOSE_PAREN;
-
-mapMethod : (ID DOT)* MAP_ OPEN_PAREN OPEN_PAREN (ID COMMA?)*  CLOSE_PAREN ARROW  OPEN_PAREN html CLOSE_PAREN CLOSE_PAREN ;
+// 4 MAIN PARTS
+importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT|USESTATE|ID) COMMA?)* RIGHTCURLY? FROM STRING SEMI;
 
 export : EXPORT DEFAULT ID SEMI ;
+
+variableDeclaration : (VAR | CONST | LET) ID EQUAL (value|functionDeclaration|array|ID) SEMI? ;
+
+functionDeclaration : regularFunction | callBackFunction ;
+
+//FUNCTIONS
+regularFunction : FUNCTION ID LEFTPAREN parameters? RIGHTPAREN LEFTCURLY functionbody RIGHTCURLY ;
+
+callBackFunction : LEFTPAREN parameters?  RIGHTPAREN ARROW LEFTCURLY? functionbody RIGHTCURLY ;
+
+parameters: (LEFTCURLY? ID (COMMA ID)* RIGHTCURLY?);
+
+functionbody : funcStatement* returnStatement? ;
+
+funcStatement : useEffect|useState|useRef|variableDeclaration|print|callFunc|jsx_element;
+
+callFunc: ID LEFTPAREN (ID COMMA?)* RIGHTPAREN SEMI? ;
+
+returnStatement:RETURN LEFTPAREN (jsx_element)* RIGHTPAREN SEMI;
+
+//USES
+useRef : USEREF LEFTPAREN (STRING COMMA?)* RIGHTPAREN ;
+
+useState: CONST LEFTBRACKET ID COMMA  ID RIGHTBRACKET EQUAL USESTATE LEFTPAREN value RIGHTPAREN SEMI;
+
+useEffect: USEEFFECT LEFTPAREN callBackFunction COMMA LEFTBRACKET (ID COMMA?)* RIGHTBRACKET RIGHTPAREN SEMI;
+
+
+
+////map
+map:LEFTCURLY ID DOT ID LEFTPAREN LEFTPAREN ID RIGHTPAREN ARROW LEFTPAREN jsx_element* RIGHTPAREN RIGHTPAREN RIGHTCURLY;
+
+
+////////this for the html code
+jsx_element : LESSTHAN ID (jsx_attribute)* GREATERTHAN content* LESSTHAN DIVISION ID GREATERTHAN;
+
+content:jsx_element|shortIf|map|useAttribute|component|ID|COLON|DOT;
+
+//access value of the object
+useAttribute:LEFTCURLY ID DOT ID RIGHTCURLY;
+
+//this for css style or event handlers funciton.
+jsx_attribute :
+ID EQUAL (LEFTCURLY LEFTCURLY? attributeDetails+ RIGHTCURLY RIGHTCURLY?);
+
+/// attribute detalis
+// the first section is for the styling
+attributeDetails:(STRING|COMMA ID COLON value |ID COLON value| attributeDetailsFunction|attributeDetailsFunction );
+//onClick - OnChange .....
+attributeDetailsFunction:LEFTPAREN RIGHTPAREN ARROW ID LEFTPAREN (ID|value) RIGHTPAREN ;
+
+attributeDetailsAttribute: ID (DOT ID)?;
+
+///   attribute details     ///
+// if i have another component here i can add it to add to the app.jsx file
+component:LESSTHAN ID props*  SELF_CLOSED;
+//this three rule is for the component and if it take props
+props:name_prop EQUAL LEFTCURLY prop_value  RIGHTCURLY;
+name_prop:ID;
+prop_value:ID|value;
+// Rendering a component conditionally
+//{condition && <ComponentToShow />}
+shortIf: LEFTCURLY (component|ID ) ((AND|OR|LESSEQUAL|GREATEREQUAL|EQ) (component|ID ))+ RIGHTCURLY;
+
+/////
+
+value:(STRING|BOOL|DOUBLE|INT|NULL);
+
+array: arrayObjects | arrayValues;
+
+arrayObjects: LEFTBRACKET (object)* RIGHTBRACKET;
+
+arrayValues : LEFTBRACKET (value COMMA?)* RIGHTBRACKET;
+
+object:LEFTCURLY element*  RIGHTCURLY COMMA?;
+
+element:ID COLON value COMMA? ;
+
+print : CONSOLE DOT LOG LEFTPAREN (ID | STRING  | INT)* RIGHTPAREN SEMI ;
+

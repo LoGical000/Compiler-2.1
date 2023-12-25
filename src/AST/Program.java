@@ -1,16 +1,13 @@
 package AST;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Program {
     List<ImportStatement> importStatementList = new ArrayList<ImportStatement>();
-    List<RegularFunction> regularFunctionList = new ArrayList<RegularFunction>();
     List<VariableDeclaration> variableDeclarationList = new ArrayList<VariableDeclaration>();
-    List<Export> exportList = new ArrayList<Export>();
-
+    List<FunctionDeclaration> functionDeclarationList = new ArrayList<FunctionDeclaration>();
+    Export export;
 
     public List<ImportStatement> getImportStatementList() {
         return importStatementList;
@@ -18,14 +15,6 @@ public class Program {
 
     public void setImportStatementList(List<ImportStatement> importStatementList) {
         this.importStatementList = importStatementList;
-    }
-
-    public List<RegularFunction> getRegularFunctionList() {
-        return regularFunctionList;
-    }
-
-    public void setRegularFunctionList(List<RegularFunction> regularFunctionList) {
-        this.regularFunctionList = regularFunctionList;
     }
 
     public List<VariableDeclaration> getVariableDeclarationList() {
@@ -36,21 +25,29 @@ public class Program {
         this.variableDeclarationList = variableDeclarationList;
     }
 
-    public List<Export> getExportList() {
-        return exportList;
+    public List<FunctionDeclaration> getFunctionDeclarationList() {
+        return functionDeclarationList;
     }
 
-    public void setExportList(List<Export> exportList) {
-        this.exportList = exportList;
+    public void setFunctionDeclarationList(List<FunctionDeclaration> functionDeclarationList) {
+        this.functionDeclarationList = functionDeclarationList;
+    }
+
+    public Export getExport() {
+        return export;
+    }
+
+    public void setExport(Export export) {
+        this.export = export;
     }
 
     @Override
     public String toString() {
         return "Program{" +
                 "\n importStatementList=" + importStatementList +
-                "\n , regularFunctionList=" + regularFunctionList +
-                "\n , variableDeclarationList=" + variableDeclarationList +
-                "\n , exportList=" + exportList +
-                "\n }";
+                "\n variableDeclarationList=" + variableDeclarationList +
+                "\n functionDeclarationList=" + functionDeclarationList +
+                "\n export=" + export +
+                "\n}";
     }
 }
