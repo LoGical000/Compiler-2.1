@@ -1,10 +1,14 @@
 package Visitor;
 
 import AST.*;
+import SymbolTable.*;
 import gen.ReactParser;
 import gen.ReactParserBaseVisitor;
 
 public class BaseVisitor extends ReactParserBaseVisitor {
+
+    SymbolTable symbolTable = new SymbolTable();
+    Row row = new Row();
 
     ///PROGRAM
     @Override
@@ -29,6 +33,9 @@ public class BaseVisitor extends ReactParserBaseVisitor {
             }
         }
         program.setExport(visitExport(ctx.export()));
+
+        this.symbolTable.print();
+
         return program;
 
     }
@@ -58,6 +65,11 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         }
         importStatement.setFrom(ctx.STRING().getText());
 
+        Row row = new Row();
+        row.setType("IMPORTFROM");
+        row.setValue(importStatement.getFrom());
+        this.symbolTable.getRows().add(row);
+
         return importStatement;
     }
 
@@ -65,6 +77,30 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     @Override
     public VariableDeclaration visitVariableDeclaration(ReactParser.VariableDeclarationContext ctx) {
         VariableDeclaration variableDeclaration = new VariableDeclaration();
+
+        //type
+        if(ctx.VAR()!=null)
+            variableDeclaration.setType(ctx.VAR().getText());
+        else if(ctx.CONST()!=null)
+            variableDeclaration.setType(ctx.CONST().getText());
+        else
+            variableDeclaration.setType(ctx.LET().getText());
+
+        //variable
+        variableDeclaration.setVariable(ctx.ID(0).getText());
+
+        //value
+        if(ctx.ID(1)!=null)
+            variableDeclaration.setId(ctx.ID(1).getText());
+        else if(ctx.functionDeclaration()!=null)
+            variableDeclaration.setFunctionDeclaration(visitFunctionDeclaration(ctx.functionDeclaration()));
+        else if(ctx.array()!=null)
+            variableDeclaration.setArray(visitArray(ctx.array()));
+        else
+            variableDeclaration.setValue(visitValue(ctx.value()));
+
+
+
         return variableDeclaration;
 
     }
@@ -73,6 +109,7 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     @Override
     public FunctionDeclaration visitFunctionDeclaration(ReactParser.FunctionDeclarationContext ctx) {
         FunctionDeclaration functionDeclaration=new FunctionDeclaration();
+
         if (ctx.regularFunction()!=null)
             functionDeclaration.setRegularFunction(visitRegularFunction(ctx.regularFunction()));
         else if (ctx.callBackFunction()!=null)
@@ -90,6 +127,12 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         if (ctx.parameters()!=null)
             regularFunction.setParameters(visitParameters(ctx.parameters()));
         regularFunction.setFunctionBody(visitFunctionbody(ctx.functionbody()));
+
+
+        Row row = new Row();
+        row.setType("FuncNAME");
+        row.setValue(regularFunction.getFunctionName());
+        this.symbolTable.getRows().add(row);
 
         return regularFunction;
     }
@@ -123,6 +166,8 @@ public class BaseVisitor extends ReactParserBaseVisitor {
                 parameters.getIds().add(ctx.ID(i).getText());
             }
         }
+
+
         return parameters;
 
     }
@@ -258,6 +303,67 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     }
 
     @Override
+    public Array visitArray(ReactParser.ArrayContext ctx) {
+        Array array = new Array();
+
+        if(ctx.arrayObjects()!=null)
+            array.setArrayObjects(visitArrayObjects(ctx.arrayObjects()));
+        else
+            array.setArrayValues(visitArrayValues(ctx.arrayValues()));
+
+        return array;
+    }
+
+    @Override
+    public ArrayObjects visitArrayObjects(ReactParser.ArrayObjectsContext ctx) {
+        ArrayObjects arrayObjects = new ArrayObjects();
+
+        for(int i=0;i<ctx.object().size();i++){
+            if(ctx.object(i)!=null)
+                arrayObjects.getObjectList().add(visitObject(ctx.object(i)));
+        }
+
+        return  arrayObjects;
+    }
+
+    @Override
+    public ArrayValues visitArrayValues(ReactParser.ArrayValuesContext ctx) {
+        ArrayValues arrayValues = new ArrayValues();
+
+        for(int i=0;i<ctx.value().size();i++){
+            if(ctx.value(i)!=null)
+                arrayValues.getValueList().add(visitValue(ctx.value(i)));
+        }
+
+        return arrayValues;
+    }
+
+    @Override
+    public OBJECT visitObject(ReactParser.ObjectContext ctx) {
+        OBJECT object = new OBJECT();
+
+        for(int i=0;i<ctx.element().size();i++){
+            if(ctx.element(i)!=null)
+                object.getElementList().add(visitElement(ctx.element(i)));
+        }
+
+        return object;
+    }
+
+    @Override
+    public Element visitElement(ReactParser.ElementContext ctx) {
+        Element element = new Element();
+
+        element.setId(ctx.ID().getText());
+        if(ctx.value()!=null)
+            element.setValue(visitValue(ctx.value()));
+        else
+            element.setArray(visitArray(ctx.array()));
+
+        return element;
+    }
+
+    @Override
     public ReturnStatement visitReturnStatement(ReactParser.ReturnStatementContext ctx) {
         ReturnStatement returnStatement = new ReturnStatement();
 
@@ -267,6 +373,21 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         }
 
         return returnStatement;
+    }
+
+    @Override
+    public MAP visitMap(ReactParser.MapContext ctx) {
+        MAP map = new MAP();
+
+        map.setObjectsList(ctx.ID(0).getText());
+        map.setMapType(ctx.ID(1).getText());
+        map.setObject(ctx.ID(2).getText());
+        for(int i=0;i<ctx.jsx_element().size();i++){
+            if (ctx.jsx_element(i)!=null)
+                map.getJsxElementList().add(visitJsx_element(ctx.jsx_element(i)));
+        }
+
+        return map;
     }
 
     @Override

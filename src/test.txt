@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import './anas.css';
 function func1 ( a , b ) {
 console.log("testing 1" 1 h);
 }
