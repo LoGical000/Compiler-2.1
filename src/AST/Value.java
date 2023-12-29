@@ -6,6 +6,7 @@ public class Value {
     String aNull;
     String aDouble;
     String integer;
+    ValueIndex valueIndex;
 
     public String getString() {
         return string;
@@ -47,14 +48,43 @@ public class Value {
         this.integer = integer;
     }
 
+    public ValueIndex getValueIndex() {
+        return valueIndex;
+    }
+
+    public void setValueIndex(ValueIndex valueIndex) {
+        this.valueIndex = valueIndex;
+    }
+
     @Override
     public String toString() {
+        if(string != null)
+            return "Value{" +
+                    "\nstring='" + string +
+                    "\n}";
+
+        if(aBoolean != null)
+            return "Value{" +
+                    "\naBoolean='" + aBoolean +
+                    "\n}";
+
+        if(aNull != null)
+            return "Value{" +
+                    "\naNull='" + aNull +
+                    "\n}";
+
+        if(aDouble != null)
+            return "Value{" +
+                    "\naDouble='" + aDouble +
+                    "\n}";
+
+        if(valueIndex != null)
+            return "Value{" +
+                    "\nValueIndex='" + valueIndex +
+                    "\n}";
+
         return "Value{" +
-                "string='" + string + '\'' +
-                ", aBoolean=" + aBoolean +
-                ", aNull='" + aNull + '\'' +
-                ", aDouble=" + aDouble +
-                ", integer=" + integer +
-                '}';
+                "\ninteger='" + integer +
+                "\n}";
     }
 }

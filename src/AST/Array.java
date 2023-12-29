@@ -22,9 +22,15 @@ public class Array {
 
     @Override
     public String toString() {
+        if (arrayObjects != null)
+            return "Array{" +
+                    "\narrayObjects=" + arrayObjects +
+                    "\n}";
+
         return "Array{" +
-                "arrayObjects=" + arrayObjects +
-                ", arrayValues=" + arrayValues +
-                '}';
+                "\narrayValues=" + arrayValues +
+                "\n}";
     }
 }
+
+

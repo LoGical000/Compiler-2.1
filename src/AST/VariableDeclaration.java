@@ -58,13 +58,31 @@ public class VariableDeclaration {
 
     @Override
     public String toString() {
+        if (value != null)
+            return "VariableDeclaration{" +
+                    "type='" + type + '\'' +
+                    ", variable='" + variable + '\'' +
+                    ", value=" + value +
+                    '}';
+
+        else if (functionDeclaration != null)
+            return "VariableDeclaration{" +
+                    "type='" + type + '\'' +
+                    ", variable='" + variable + '\'' +
+                    ", functionDeclaration=" + functionDeclaration +
+                    '}';
+
+        else if (array != null)
+            return "VariableDeclaration{" +
+                    "type='" + type + '\'' +
+                    ", variable='" + variable + '\'' +
+                    ", array=" + array +
+                    '}';
+
         return "VariableDeclaration{" +
                 "type='" + type + '\'' +
                 ", variable='" + variable + '\'' +
-                ", id='" + id + '\'' +
-                ", functionDeclaration=" + functionDeclaration +
-                ", array=" + array +
-                ", value=" + value +
+                ", id=" + id +
                 '}';
     }
 }

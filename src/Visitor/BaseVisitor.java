@@ -298,8 +298,20 @@ public class BaseVisitor extends ReactParserBaseVisitor {
             value.setaNull(ctx.NULL().getText());
         else if(ctx.BOOL()!=null)
             value.setaBoolean(ctx.BOOL().getText());
+        else if(ctx.valueIndex()!=null)
+            value.setValueIndex(visitValueIndex(ctx.valueIndex()));
 
         return value;
+    }
+
+    @Override
+    public ValueIndex visitValueIndex(ReactParser.ValueIndexContext ctx) {
+        ValueIndex valueIndex= new ValueIndex();
+
+        valueIndex.setArrayName(ctx.ID().getText());
+        valueIndex.setIndex(ctx.INT().getText());
+
+        return valueIndex;
     }
 
     @Override
@@ -393,6 +405,175 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     @Override
     public JSXElement visitJsx_element(ReactParser.Jsx_elementContext ctx) {
         JSXElement jsxElement = new JSXElement();
+
+        if(ctx.ID(0)!=null)
+            jsxElement.setJsxElementName(ctx.ID(0).getText());
+        for(int i=0;i<ctx.jsx_attribute().size();i++){
+            if (ctx.jsx_attribute(i)!=null)
+                jsxElement.getJsxAttributeList().add(visitJsx_attribute(ctx.jsx_attribute(i)));
+        }
+        for(int i=0;i<ctx.jsx_class().size();i++){
+            if (ctx.jsx_class(i)!=null)
+                jsxElement.getJsxClassList().add(visitJsx_class(ctx.jsx_class(i)));
+        }
+        for(int i=0;i<ctx.content().size();i++){
+            if (ctx.content(i)!=null)
+                jsxElement.getContentList().add(visitContent(ctx.content(i)));
+        }
+
         return jsxElement;
+    }
+
+    @Override
+    public Content visitContent(ReactParser.ContentContext ctx) {
+        Content content = new Content();
+
+        if(ctx.ID()!=null)
+            content.setId(ctx.ID().getText());
+        else if (ctx.jsx_element()!=null)
+            content.setJsxElement(visitJsx_element(ctx.jsx_element()));
+        else if (ctx.map()!=null)
+            content.setMap(visitMap(ctx.map()));
+        else if (ctx.component()!=null)
+            content.setComponent(visitComponent(ctx.component()));
+        else if (ctx.shortIf()!=null)
+            content.setShortIf(visitShortIf(ctx.shortIf()));
+        else if (ctx.jsx_element()!=null)
+            content.setUseAttribute(visitUseAttribute(ctx.useAttribute()));
+
+        return content;
+    }
+
+    @Override
+    public UseAttribute visitUseAttribute(ReactParser.UseAttributeContext ctx) {
+        UseAttribute useAttribute = new UseAttribute();
+
+        useAttribute.setObject(ctx.ID(0).getText());
+        useAttribute.setAttribute(ctx.ID(1).getText());
+
+        return useAttribute;
+    }
+
+    @Override
+    public JSXClass visitJsx_class(ReactParser.Jsx_classContext ctx) {
+        JSXClass jsxClass = new JSXClass();
+
+        jsxClass.setId(ctx.ID().getText());
+        jsxClass.setValue(visitValue(ctx.value()));
+
+        return jsxClass;
+    }
+
+    @Override
+    public JSXAttribute visitJsx_attribute(ReactParser.Jsx_attributeContext ctx) {
+        JSXAttribute jsxAttribute = new JSXAttribute();
+
+        jsxAttribute.setName(ctx.ID().getText());
+        jsxAttribute.getAttributeDetailsList().add(visitAttributeDetails(ctx.attributeDetails(0)));
+        for(int i=1;i<ctx.attributeDetails().size();i++){
+            if(ctx.attributeDetails(i)!=null){
+                jsxAttribute.getAttributeDetailsList().add(visitAttributeDetails(ctx.attributeDetails(i)));
+            }
+        }
+
+        return jsxAttribute;
+    }
+
+    @Override
+    public AttributeDetails visitAttributeDetails(ReactParser.AttributeDetailsContext ctx) {
+        AttributeDetails attributeDetails = new AttributeDetails();
+
+        if(ctx.STRING()!=null)
+            attributeDetails.setString(ctx.STRING().getText());
+        else if (ctx.attributeDetailsAttribute()!=null)
+            attributeDetails.setAttributeDetailsAttribute(visitAttributeDetailsAttribute(ctx.attributeDetailsAttribute()));
+        else if (ctx.attributeDetailsFunction()!=null)
+            attributeDetails.setAttributeDetailsFunction(visitAttributeDetailsFunction(ctx.attributeDetailsFunction()));
+        else {
+            attributeDetails.setId(ctx.ID().getText());
+            attributeDetails.setValue(visitValue(ctx.value()));
+        }
+
+        return attributeDetails;
+    }
+
+    @Override
+    public AttributeDetailsFunction visitAttributeDetailsFunction(ReactParser.AttributeDetailsFunctionContext ctx) {
+        AttributeDetailsFunction attributeDetailsFunction = new AttributeDetailsFunction();
+
+        attributeDetailsFunction.setFunc(ctx.ID(0).getText());
+        if(ctx.ID(1)!=null)
+            attributeDetailsFunction.setId(ctx.ID(1).getText());
+        else
+            attributeDetailsFunction.setValue(visitValue(ctx.value()));
+
+        return attributeDetailsFunction;
+    }
+
+    @Override
+    public AttributeDetailsAttribute visitAttributeDetailsAttribute(ReactParser.AttributeDetailsAttributeContext ctx) {
+        AttributeDetailsAttribute attributeDetailsAttribute = new AttributeDetailsAttribute();
+
+        attributeDetailsAttribute.setId(ctx.ID(0).getText());
+        if(ctx.ID(1)!=null)
+            attributeDetailsAttribute.setAttribute(ctx.ID(1).getText());
+
+        return attributeDetailsAttribute;
+    }
+
+    @Override
+    public Component visitComponent(ReactParser.ComponentContext ctx) {
+        Component component = new Component();
+
+        component.setComponent(ctx.ID().getText());
+        for(int i=0;i<ctx.props().size();i++){
+            if(ctx.props(i)!=null)
+                component.getPropsList().add(visitProps(ctx.props(i)));
+        }
+
+        return component;
+    }
+
+    @Override
+    public Props visitProps(ReactParser.PropsContext ctx) {
+        Props props = new Props();
+
+        props.setPropName(ctx.ID().getText());
+        props.setPropValue(visitProp_value(ctx.prop_value()));
+
+        return  props;
+    }
+
+    @Override
+    public PropValue visitProp_value(ReactParser.Prop_valueContext ctx) {
+        PropValue propValue = new PropValue();
+
+        if(ctx.ID()!=null)
+            propValue.setId(ctx.ID().getText());
+        else
+            propValue.setValue(visitValue(ctx.value()));
+
+        return propValue;
+    }
+
+    @Override
+    public ShortIf visitShortIf(ReactParser.ShortIfContext ctx) {
+        ShortIf shortIf = new ShortIf();
+
+        if(ctx.ID(0)!=null)
+            shortIf.setConditionId(ctx.ID(0).getText());
+        else
+            shortIf.setConditionComponent(visitComponent(ctx.component(0)));
+
+        for(int i=1;i<ctx.ID().size();i++)
+            if(ctx.ID(i)!=null)
+                shortIf.getIds().add(ctx.ID(i).getText());
+
+        for(int i=1;i<ctx.component().size();i++)
+            if(ctx.component(i)!=null)
+                shortIf.getComponentList().add(visitComponent(ctx.component(i)));
+
+
+        return shortIf;
     }
 }

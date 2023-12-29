@@ -26,8 +26,8 @@ public class UseEffect {
     @Override
     public String toString() {
         return "UseEffect{" +
-                "callBackFunction=" + callBackFunction +
-                ", ids=" + ids +
-                '}';
+                "\ncallBackFunction=" + callBackFunction +
+                "\n, ids=" + ids +
+                "\n}";
     }
 }

@@ -17,7 +17,7 @@ public class OBJECT {
     @Override
     public String toString() {
         return "OBJECT{" +
-                "elementList=" + elementList +
-                '}';
+                "\nelementList=" + elementList +
+                "\n}";
     }
 }

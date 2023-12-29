@@ -131,6 +131,12 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJsx_attribute(ReactParser.Jsx_attributeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ReactParser#jsx_class}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsx_class(ReactParser.Jsx_classContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ReactParser#attributeDetails}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -161,12 +167,6 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProps(ReactParser.PropsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#name_prop}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitName_prop(ReactParser.Name_propContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ReactParser#prop_value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -184,6 +184,12 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValue(ReactParser.ValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ReactParser#valueIndex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValueIndex(ReactParser.ValueIndexContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#array}.
 	 * @param ctx the parse tree

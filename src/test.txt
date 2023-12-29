@@ -1,6 +1,35 @@
-import {useState} from 'react';
-import './anas.css';
-function func1 ( a , b ) {
-console.log("testing 1" 1 h);
-}
-export default anas ;
+import React, { useState } from 'react';
+import ProductDetails from './ProductDetails';
+
+
+const ProductList = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const products = [
+    { id: 1, name: 'camera', description: 'Camera Description',image:'http://localhost:3000/camera.jpg', },
+    { id: 2, name: 'laptop', description: 'Laptop Description',image:'http://localhost:3000/laptop.jpg', },
+    { id: 3, name: 'shampoo', description: 'Shampoo Description',image:'http://localhost:3000/shampoo.jpg',},
+  ];
+
+  return (
+    <div style={{ display: 'flex' ,marginLeft:'20px'}}>
+      <div style={{ flex: 5 }}>
+        <h1>Product List</h1>
+          {products.map((product) => (
+            <div   style={{border: '1.5px solid black',textAlign: 'center',marginTop:'2px'}} key={product.id} onClick={() => setSelectedProduct(product)}>
+              <h3>{product.name}</h3>
+
+              <img width={'100px'} src={product.image}></img>
+            </div>
+
+          ))}
+
+      </div>
+      <div style={{ flex: 7 }}>
+        {selectedProduct && <ProductDetails product={selectedProduct} />}
+      </div>
+    </div>
+  );
+};
+
+export default ProductList;

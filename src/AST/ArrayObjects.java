@@ -18,6 +18,6 @@ public class ArrayObjects {
     public String toString() {
         return "ArrayObjects{" +
                 "\n objectList=" + objectList +
-                '}';
+                "\n}";
     }
 }

@@ -34,10 +34,17 @@ public class Element {
 
     @Override
     public String toString() {
-        return "Element{" +
-                "id='" + id + '\'' +
-                ", value=" + value +
-                ", array=" + array +
-                '}';
+        if (value != null){
+            return "Element{" +
+                    "id='" + id + '\'' +
+                    "\n, value=" + value +
+                    "\n }";
+    }
+        else {
+            return "Element{" +
+                    "id='" + id + '\'' +
+                    "\n, array=" + array +
+                    "\n }";
+        }
     }
 }

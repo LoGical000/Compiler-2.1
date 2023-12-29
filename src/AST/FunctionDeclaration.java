@@ -22,8 +22,12 @@ public class FunctionDeclaration {
 
     @Override
     public String toString() {
-        return "FunctionDeclaration{" +
-                "\n regularFunction=" + regularFunction +
+        if(regularFunction != null)
+            return "FunctionDeclaration{" +
+                    "\n regularFunction=" + regularFunction +
+                    "\n }";
+
+        return "callBackFunction{" +
                 "\n callBackFunction=" + callBackFunction +
                 "\n }";
     }

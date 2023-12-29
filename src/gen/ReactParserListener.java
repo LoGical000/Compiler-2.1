@@ -208,6 +208,16 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitJsx_attribute(ReactParser.Jsx_attributeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ReactParser#jsx_class}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsx_class(ReactParser.Jsx_classContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#jsx_class}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsx_class(ReactParser.Jsx_classContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ReactParser#attributeDetails}.
 	 * @param ctx the parse tree
 	 */
@@ -258,16 +268,6 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitProps(ReactParser.PropsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#name_prop}.
-	 * @param ctx the parse tree
-	 */
-	void enterName_prop(ReactParser.Name_propContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#name_prop}.
-	 * @param ctx the parse tree
-	 */
-	void exitName_prop(ReactParser.Name_propContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ReactParser#prop_value}.
 	 * @param ctx the parse tree
 	 */
@@ -297,6 +297,16 @@ public interface ReactParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValue(ReactParser.ValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ReactParser#valueIndex}.
+	 * @param ctx the parse tree
+	 */
+	void enterValueIndex(ReactParser.ValueIndexContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ReactParser#valueIndex}.
+	 * @param ctx the parse tree
+	 */
+	void exitValueIndex(ReactParser.ValueIndexContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#array}.
 	 * @param ctx the parse tree

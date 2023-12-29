@@ -42,7 +42,7 @@ map:LEFTCURLY ID DOT ID LEFTPAREN LEFTPAREN ID RIGHTPAREN ARROW LEFTPAREN jsx_el
 
 
 ////////this for the html code
-jsx_element : LESSTHAN ID? (jsx_attribute|jsx_class)* GREATERTHAN content* LESSTHAN DIVISION ID GREATERTHAN;
+jsx_element : LESSTHAN ID? (jsx_attribute|jsx_class)* GREATERTHAN content* LESSTHAN DIVISION ID? GREATERTHAN;
 
 content:jsx_element|shortIf|map|useAttribute|component|ID|COLON|DOT;
 
@@ -66,12 +66,11 @@ attributeDetailsAttribute: ID (DOT ID)?;
 // if i have another component here i can add it to add to the app.jsx file
 component:LESSTHAN ID props*  SELF_CLOSED;
 //this three rule is for the component and if it take props
-props:name_prop EQUAL LEFTCURLY prop_value  RIGHTCURLY;
-name_prop:ID;
+props:ID EQUAL LEFTCURLY prop_value  RIGHTCURLY;
 prop_value:ID|value;
 // Rendering a component conditionally
 //{condition && <ComponentToShow />}
-shortIf: LEFTCURLY (component|ID ) ((AND|OR|LESSEQUAL|GREATEREQUAL|EQ) (component|ID ))+ RIGHTCURLY;
+shortIf: LEFTCURLY (component|ID) ((AND|OR|LESSEQUAL|GREATEREQUAL|EQ) (component|ID))+ RIGHTCURLY;
 
 /////
 

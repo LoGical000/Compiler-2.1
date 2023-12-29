@@ -65,36 +65,41 @@ public class FuncStatement {
         this.jsxElement = jsxElement;
     }
 
+
     @Override
     public String toString() {
-        if(useState!=null)
+        if(useState != null)
             return "FuncStatement{" +
-                    " useState=" + useState +
-                    "}";
-        else if(useEffect!=null)
-            return "FuncStatement{" +
-                    " useEffect=" + useEffect +
-                    "}";
-        else if(useRef!=null)
-            return "FuncStatement{" +
-                    " useRef=" + useRef +
-                    "}";
-        else if(variableDeclaration!=null)
-            return "FuncStatement{" +
-                    " variableDeclaration=" + variableDeclaration +
-                    "}";
-        else if(callFunc!=null)
-            return "FuncStatement{" +
-                    " callFunc=" + callFunc +
-                    "}";
-        else if(print!=null)
-            return "FuncStatement{" +
-                    " print=" + print +
-                    "}";
-        else
-            return "FuncStatement{" +
-                    " jsxElement=" + jsxElement +
-                    "}";
+                    "\nuseState=" + useState +
+                    "\n}";
 
+        if(useRef != null)
+            return "FuncStatement{" +
+                    "\nuseRef=" + useRef +
+                    "\n}";
+
+        if(useEffect != null)
+            return "FuncStatement{" +
+                    "\nuseEffect=" + useEffect +
+                    "\n}";
+
+        if(variableDeclaration != null)
+            return "FuncStatement{" +
+                    "\nvariableDeclaration=" + variableDeclaration +
+                    "\n}";
+
+        if(print != null)
+            return "FuncStatement{" +
+                    "\nprint=" + print +
+                    "\n}";
+
+        if(callFunc != null)
+            return "FuncStatement{" +
+                    "\ncallFunc=" + callFunc +
+                    "\n}";
+
+        return "FuncStatement{" +
+                "\njsxElement=" + jsxElement +
+                "\n}";
     }
 }
