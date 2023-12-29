@@ -5,7 +5,7 @@ options {tokenVocab=ReactLexer;}
 program : (importStatement)* (functionDeclaration | variableDeclaration)* export?;
 
 // 4 MAIN PARTS
-importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT|USESTATE|ID) COMMA?)* RIGHTCURLY? FROM STRING SEMI;
+importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT|USESTATE|ID) COMMA?)* RIGHTCURLY? FROM? STRING SEMI;
 
 export : EXPORT DEFAULT ID SEMI ;
 
@@ -42,7 +42,7 @@ map:LEFTCURLY ID DOT ID LEFTPAREN LEFTPAREN ID RIGHTPAREN ARROW LEFTPAREN jsx_el
 
 
 ////////this for the html code
-jsx_element : LESSTHAN ID (jsx_attribute)* GREATERTHAN content* LESSTHAN DIVISION ID GREATERTHAN;
+jsx_element : LESSTHAN ID? (jsx_attribute|jsx_class)* GREATERTHAN content* LESSTHAN DIVISION ID GREATERTHAN;
 
 content:jsx_element|shortIf|map|useAttribute|component|ID|COLON|DOT;
 
@@ -51,13 +51,14 @@ useAttribute:LEFTCURLY ID DOT ID RIGHTCURLY;
 
 //this for css style or event handlers funciton.
 jsx_attribute :
-ID EQUAL (LEFTCURLY LEFTCURLY? attributeDetails+ RIGHTCURLY RIGHTCURLY?);
+ID EQUAL (LEFTCURLY? LEFTCURLY? attributeDetails+ RIGHTCURLY? RIGHTCURLY?);
+jsx_class : ID EQUAL value;
 
 /// attribute detalis
 // the first section is for the styling
-attributeDetails:(STRING|COMMA ID COLON value |ID COLON value| attributeDetailsFunction|attributeDetailsFunction );
+attributeDetails:(STRING|COMMA ID COLON value |ID COLON value| attributeDetailsFunction|attributeDetailsAttribute );
 //onClick - OnChange .....
-attributeDetailsFunction:LEFTPAREN RIGHTPAREN ARROW ID LEFTPAREN (ID|value) RIGHTPAREN ;
+attributeDetailsFunction:LEFTPAREN RIGHTPAREN ARROW ID LEFTPAREN (ID|value) RIGHTPAREN SEMI?;
 
 attributeDetailsAttribute: ID (DOT ID)?;
 
@@ -74,7 +75,9 @@ shortIf: LEFTCURLY (component|ID ) ((AND|OR|LESSEQUAL|GREATEREQUAL|EQ) (componen
 
 /////
 
-value:(STRING|BOOL|DOUBLE|INT|NULL);
+value:(STRING|BOOL|DOUBLE|INT|NULL|valueIndex);
+
+valueIndex: ID LEFTBRACKET INT RIGHTBRACKET;
 
 array: arrayObjects | arrayValues;
 
@@ -82,9 +85,9 @@ arrayObjects: LEFTBRACKET (object)* RIGHTBRACKET;
 
 arrayValues : LEFTBRACKET (value COMMA?)* RIGHTBRACKET;
 
-object:LEFTCURLY element*  RIGHTCURLY COMMA?;
+object:LEFTCURLY (element COMMA?)*  RIGHTCURLY COMMA?;
 
-element:ID COLON value COMMA? ;
+element:ID COLON (value|array);
 
 print : CONSOLE DOT LOG LEFTPAREN (ID | STRING  | INT)* RIGHTPAREN SEMI ;
 

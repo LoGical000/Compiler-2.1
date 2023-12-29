@@ -5,6 +5,8 @@ package AST;
 public class Element {
     String id;
     Value value;
+    Array array;
+
 
     public String getId() {
         return id;
@@ -22,11 +24,20 @@ public class Element {
         this.value = value;
     }
 
+    public Array getArray() {
+        return array;
+    }
+
+    public void setArray(Array array) {
+        this.array = array;
+    }
+
     @Override
     public String toString() {
         return "Element{" +
-                "\n id='" + id + '\'' +
-                "\n value=" + value +
-                "\n }";
+                "id='" + id + '\'' +
+                ", value=" + value +
+                ", array=" + array +
+                '}';
     }
 }

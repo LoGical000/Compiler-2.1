@@ -53,6 +53,7 @@ DOT               : '.';
 // value
 BOOL :'true' | 'false' ;
 ID   :[a-zA-Z]+|[_a-zA-Z][a-zA-Z0-9]*;
-STRING      :'"' ~[']* '"'|'\'' ~[']*'\'';
+STRING: ( '"' ( ESCAPE | ~["\\] )* '"' ) | ( '\'' ( ESCAPE | ~['\\] )* '\'' );
+fragment ESCAPE: '\\' [\\"'];
 INT :   [0-9]+ ;
 DOUBLE :   [0-9]+ ('.' [0-9]+)? ;
