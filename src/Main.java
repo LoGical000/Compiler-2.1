@@ -12,7 +12,7 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String source="src/test.txt";
+        String source="src/tests/test2.txt";
         CharStream cs=fromFileName(source);
         ReactLexer lexer = new ReactLexer(cs);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);

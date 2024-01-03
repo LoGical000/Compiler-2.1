@@ -38,7 +38,7 @@ LEFTCURLY         : '{' ;
 RIGHTCURLY        : '}' ;
 LESSTHAN          : '<' ;
 GREATERTHAN       : '>' ;
-SELF_CLOSED       : '/>';
+//SELF_CLOSED       : '/>';
 LESSEQUAL         : '<=';
 GREATEREQUAL      : '>=';
 EQ                : '==';

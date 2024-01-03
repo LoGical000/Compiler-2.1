@@ -5,9 +5,9 @@ options {tokenVocab=ReactLexer;}
 program : (importStatement)* (functionDeclaration | variableDeclaration)* export?;
 
 // 4 MAIN PARTS
-importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT|USESTATE|ID) COMMA?)* RIGHTCURLY? FROM? STRING SEMI;
+importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT|USESTATE|ID) COMMA?)* RIGHTCURLY? FROM? STRING SEMI?;
 
-export : EXPORT DEFAULT ID SEMI ;
+export : EXPORT DEFAULT ID SEMI? ;
 
 variableDeclaration : (VAR | CONST | LET) ID EQUAL (value|functionDeclaration|array|ID) SEMI? ;
 
@@ -26,7 +26,7 @@ funcStatement : useEffect|useState|useRef|variableDeclaration|print|callFunc|jsx
 
 callFunc: ID LEFTPAREN (ID COMMA?)* RIGHTPAREN SEMI? ;
 
-returnStatement:RETURN LEFTPAREN (jsx_element)* RIGHTPAREN SEMI;
+returnStatement:RETURN LEFTPAREN (jsx_element)* RIGHTPAREN SEMI?;
 
 //USES
 useRef : USEREF LEFTPAREN (STRING COMMA?)* RIGHTPAREN ;
@@ -42,7 +42,7 @@ map:LEFTCURLY ID DOT ID LEFTPAREN LEFTPAREN ID RIGHTPAREN ARROW LEFTPAREN jsx_el
 
 
 ////////this for the html code
-jsx_element : LESSTHAN ID? (jsx_attribute|jsx_class)* GREATERTHAN content* LESSTHAN DIVISION ID? GREATERTHAN;
+jsx_element : LESSTHAN ID? (jsx_attribute|jsx_class)* GREATERTHAN? content* LESSTHAN? DIVISION ID? GREATERTHAN;
 
 content:jsx_element|shortIf|map|useAttribute|component|ID|COLON|DOT;
 
@@ -64,7 +64,7 @@ attributeDetailsAttribute: ID (DOT ID)?;
 
 ///   attribute details     ///
 // if i have another component here i can add it to add to the app.jsx file
-component:LESSTHAN ID props*  SELF_CLOSED;
+component:LESSTHAN ID props*  DIVISION GREATERTHAN;
 //this three rule is for the component and if it take props
 props:ID EQUAL LEFTCURLY prop_value  RIGHTCURLY;
 prop_value:ID|value;
