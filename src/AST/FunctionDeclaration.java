@@ -27,7 +27,7 @@ public class FunctionDeclaration {
                     "\n regularFunction=" + regularFunction +
                     "\n }";
 
-        return "callBackFunction{" +
+        return "FunctionDeclaration{" +
                 "\n callBackFunction=" + callBackFunction +
                 "\n }";
     }

@@ -32,9 +32,9 @@ public class UseState {
     @Override
     public String toString() {
         return "UseState{" +
-                "id1='" + id1 + '\'' +
+                "\n id1='" + id1 + '\'' +
                 ", id2='" + id2 + '\'' +
                 "\n values=" + value +
-                '}';
+                "\n}";
     }
 }

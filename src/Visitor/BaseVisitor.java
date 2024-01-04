@@ -8,7 +8,6 @@ import gen.ReactParserBaseVisitor;
 public class BaseVisitor extends ReactParserBaseVisitor {
 
     SymbolTable symbolTable = new SymbolTable();
-    Row row = new Row();
 
     ///PROGRAM
     @Override
@@ -78,28 +77,43 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     public VariableDeclaration visitVariableDeclaration(ReactParser.VariableDeclarationContext ctx) {
         VariableDeclaration variableDeclaration = new VariableDeclaration();
 
+
+
         //type
-        if(ctx.VAR()!=null)
+        if(ctx.VAR()!=null) {
             variableDeclaration.setType(ctx.VAR().getText());
-        else if(ctx.CONST()!=null)
+        }
+        else if(ctx.CONST()!=null) {
             variableDeclaration.setType(ctx.CONST().getText());
-        else
+        }
+        else {
             variableDeclaration.setType(ctx.LET().getText());
+        }
 
         //variable
         variableDeclaration.setVariable(ctx.ID(0).getText());
 
+
         //value
-        if(ctx.ID(1)!=null)
+        if(ctx.ID(1)!=null) {
             variableDeclaration.setId(ctx.ID(1).getText());
-        else if(ctx.functionDeclaration()!=null)
+        }
+        else if(ctx.functionDeclaration()!=null) {
             variableDeclaration.setFunctionDeclaration(visitFunctionDeclaration(ctx.functionDeclaration()));
-        else if(ctx.array()!=null)
+        }
+        else if(ctx.array()!=null) {
             variableDeclaration.setArray(visitArray(ctx.array()));
-        else
+        }
+        else {
             variableDeclaration.setValue(visitValue(ctx.value()));
+        }
 
 
+
+        Row row = new Row();
+        row.setType("Variable");
+        row.setValue(variableDeclaration.getVariable());
+        this.symbolTable.getRows().add(row);
 
         return variableDeclaration;
 
@@ -130,7 +144,7 @@ public class BaseVisitor extends ReactParserBaseVisitor {
 
 
         Row row = new Row();
-        row.setType("FuncNAME");
+        row.setType("RegularFunction");
         row.setValue(regularFunction.getFunctionName());
         this.symbolTable.getRows().add(row);
 
@@ -153,6 +167,12 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     public Export visitExport(ReactParser.ExportContext ctx) {
         Export export=new Export();
         export.setId(ctx.ID().getText());
+
+        Row row = new Row();
+        row.setType("Export");
+        row.setValue(export.getId());
+        this.symbolTable.getRows().add(row);
+
         return export;
 
     }
@@ -288,16 +308,36 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     public Value visitValue(ReactParser.ValueContext ctx) {
         Value value=new Value();
 
-        if(ctx.STRING()!=null)
+        if(ctx.STRING()!=null) {
             value.setString(ctx.STRING().getText());
-        else if(ctx.INT()!=null)
+            Row row = new Row();
+            row.setType("StringValue");
+            row.setValue(value.getString());
+            this.symbolTable.getRows().add(row);
+        }
+        else if(ctx.INT()!=null) {
             value.setInteger(ctx.INT().getText());
-        else if(ctx.DOUBLE()!=null)
+            Row row = new Row();
+            row.setType("IntValue");
+            row.setValue(value.getInteger());
+            this.symbolTable.getRows().add(row);
+        }
+        else if(ctx.DOUBLE()!=null) {
             value.setaDouble(ctx.DOUBLE().getText());
+            Row row = new Row();
+            row.setType("DoubleValue");
+            row.setValue(value.getaDouble());
+            this.symbolTable.getRows().add(row);
+        }
         else if(ctx.NULL()!=null)
             value.setaNull(ctx.NULL().getText());
-        else if(ctx.BOOL()!=null)
+        else if(ctx.BOOL()!=null) {
             value.setaBoolean(ctx.BOOL().getText());
+            Row row = new Row();
+            row.setType("BoolValue");
+            row.setValue(value.getaBoolean());
+            this.symbolTable.getRows().add(row);
+        }
         else if(ctx.valueIndex()!=null)
             value.setValueIndex(visitValueIndex(ctx.valueIndex()));
 
@@ -372,6 +412,11 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         else
             element.setArray(visitArray(ctx.array()));
 
+        Row row = new Row();
+        row.setType("Element");
+        row.setValue(element.getId());
+        this.symbolTable.getRows().add(row);
+
         return element;
     }
 
@@ -399,6 +444,11 @@ public class BaseVisitor extends ReactParserBaseVisitor {
                 map.getJsxElementList().add(visitJsx_element(ctx.jsx_element(i)));
         }
 
+        Row row = new Row();
+        row.setType("Map");
+        row.setValue(map.getObjectsList());
+        this.symbolTable.getRows().add(row);
+
         return map;
     }
 
@@ -406,8 +456,13 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     public JSXElement visitJsx_element(ReactParser.Jsx_elementContext ctx) {
         JSXElement jsxElement = new JSXElement();
 
-        if(ctx.ID(0)!=null)
+        if(ctx.ID(0)!=null) {
             jsxElement.setJsxElementName(ctx.ID(0).getText());
+            Row row = new Row();
+            row.setType("JSXElement");
+            row.setValue(jsxElement.getJsxElementName());
+            this.symbolTable.getRows().add(row);
+        }
         for(int i=0;i<ctx.jsx_attribute().size();i++){
             if (ctx.jsx_attribute(i)!=null)
                 jsxElement.getJsxAttributeList().add(visitJsx_attribute(ctx.jsx_attribute(i)));
@@ -461,6 +516,11 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         jsxClass.setId(ctx.ID().getText());
         jsxClass.setValue(visitValue(ctx.value()));
 
+        Row row = new Row();
+        row.setType("JSXClass");
+        row.setValue(jsxClass.getId());
+        this.symbolTable.getRows().add(row);
+
         return jsxClass;
     }
 
@@ -469,6 +529,10 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         JSXAttribute jsxAttribute = new JSXAttribute();
 
         jsxAttribute.setName(ctx.ID().getText());
+        Row row = new Row();
+        row.setType("JSXAttribute");
+        row.setValue(jsxAttribute.getName());
+        this.symbolTable.getRows().add(row);
         jsxAttribute.getAttributeDetailsList().add(visitAttributeDetails(ctx.attributeDetails(0)));
         for(int i=1;i<ctx.attributeDetails().size();i++){
             if(ctx.attributeDetails(i)!=null){
@@ -526,6 +590,10 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         Component component = new Component();
 
         component.setComponent(ctx.ID().getText());
+        Row row = new Row();
+        row.setType("Component");
+        row.setValue(component.getComponent());
+        this.symbolTable.getRows().add(row);
         for(int i=0;i<ctx.props().size();i++){
             if(ctx.props(i)!=null)
                 component.getPropsList().add(visitProps(ctx.props(i)));
@@ -540,6 +608,11 @@ public class BaseVisitor extends ReactParserBaseVisitor {
 
         props.setPropName(ctx.ID().getText());
         props.setPropValue(visitProp_value(ctx.prop_value()));
+
+        Row row = new Row();
+        row.setType("Prop");
+        row.setValue(props.getPropName());
+        this.symbolTable.getRows().add(row);
 
         return  props;
     }
@@ -576,4 +649,35 @@ public class BaseVisitor extends ReactParserBaseVisitor {
 
         return shortIf;
     }
+
+//
+//    // Add a print_ast method
+//    public void print_ast(Program root) {
+//        System.out.println("Abstract Syntax Tree:");
+//
+//        // Start the recursive traversal
+//        print_ast_recursive(root, 0);
+//    }
+//
+//    // Recursive method to traverse and print the AST
+//    private void print_ast_recursive(Node node, int depth) {
+//        if (node != null) {
+//            // Print current node
+//            System.out.println(getIndent(depth) + node);
+//
+//            // Recursively print child nodes
+//            for (Node child : node.()) {
+//                print_ast_recursive(child, depth + 1);
+//            }
+//        }
+//    }
+//
+//    // Helper method to generate indentation based on depth
+//    private String getIndent(int depth) {
+//        StringBuilder indent = new StringBuilder();
+//        for (int i = 0; i < depth; i++) {
+//            indent.append("  "); // Adjust the number of spaces for indentation
+//        }
+//        return indent.toString();
+//    }
 }

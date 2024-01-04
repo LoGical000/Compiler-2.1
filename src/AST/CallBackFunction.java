@@ -22,8 +22,14 @@ public class CallBackFunction {
 
     @Override
     public String toString() {
+        if(parameters!=null)
+        {
+            return "CallBackFunction{" +
+                    "\n parameters=" + parameters +
+                    "\n functionBody=" + functionBody +
+                    "\n}";
+        }
         return "CallBackFunction{" +
-                "\n parameters=" + parameters +
                 "\n functionBody=" + functionBody +
                 "\n}";
     }

@@ -60,29 +60,29 @@ public class VariableDeclaration {
     public String toString() {
         if (value != null)
             return "VariableDeclaration{" +
-                    "type='" + type + '\'' +
-                    ", variable='" + variable + '\'' +
-                    ", value=" + value +
-                    '}';
+                    "\n type='" + type + '\'' +
+                    "\n, variable='" + variable + '\'' +
+                    "\n, value=" + value +
+                    "\n}";
 
         else if (functionDeclaration != null)
             return "VariableDeclaration{" +
-                    "type='" + type + '\'' +
-                    ", variable='" + variable + '\'' +
-                    ", functionDeclaration=" + functionDeclaration +
-                    '}';
+                    "\n type='" + type + '\'' +
+                    "\n, variable='" + variable + '\'' +
+                    "\n, functionDeclaration=" + functionDeclaration +
+                    "\n}";
 
         else if (array != null)
             return "VariableDeclaration{" +
-                    "type='" + type + '\'' +
-                    ", variable='" + variable + '\'' +
-                    ", array=" + array +
-                    '}';
+                    "\n type='" + type + '\'' +
+                    "\n, variable='" + variable + '\'' +
+                    "\n, array=" + array +
+                    "\n}";
 
         return "VariableDeclaration{" +
-                "type='" + type + '\'' +
-                ", variable='" + variable + '\'' +
-                ", id=" + id +
-                '}';
+                "\n type='" + type + '\'' +
+                "\n, variable='" + variable + '\'' +
+                "\n, id=" + id +
+                "\n}";
     }
 }
