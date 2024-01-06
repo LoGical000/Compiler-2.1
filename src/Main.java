@@ -5,7 +5,6 @@ import gen.ReactParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.io.IOException;
 
@@ -30,11 +29,8 @@ public class Main {
     }
 
     static void print_ast(ParseTree tree, int depth) {
-        if (tree.getChildCount() == 0) {
-            TerminalNode terminalNode = (TerminalNode) tree;
-            System.out.println(getIndent(depth) + "TerminalNode: " + terminalNode.getSymbol().getText());
-        } else {
-            System.out.println(getIndent(depth) + "Non-terminal: " + tree.getClass().getSimpleName());
+        if (tree.getChildCount() != 0) {
+            System.out.println(getIndent(depth) + tree.getClass().getSimpleName().replace("Context", ""));
 
             for (int i = 0; i < tree.getChildCount(); i++) {
                 print_ast(tree.getChild(i), depth + 1);
