@@ -33,6 +33,7 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         }
         program.setExport(visitExport(ctx.export()));
 
+        System.out.println("******** SYMBOL TABLE:\n");
         this.symbolTable.print();
 
         return program;
@@ -649,35 +650,4 @@ public class BaseVisitor extends ReactParserBaseVisitor {
 
         return shortIf;
     }
-
-//
-//    // Add a print_ast method
-//    public void print_ast(Program root) {
-//        System.out.println("Abstract Syntax Tree:");
-//
-//        // Start the recursive traversal
-//        print_ast_recursive(root, 0);
-//    }
-//
-//    // Recursive method to traverse and print the AST
-//    private void print_ast_recursive(Node node, int depth) {
-//        if (node != null) {
-//            // Print current node
-//            System.out.println(getIndent(depth) + node);
-//
-//            // Recursively print child nodes
-//            for (Node child : node.()) {
-//                print_ast_recursive(child, depth + 1);
-//            }
-//        }
-//    }
-//
-//    // Helper method to generate indentation based on depth
-//    private String getIndent(int depth) {
-//        StringBuilder indent = new StringBuilder();
-//        for (int i = 0; i < depth; i++) {
-//            indent.append("  "); // Adjust the number of spaces for indentation
-//        }
-//        return indent.toString();
-//    }
 }
