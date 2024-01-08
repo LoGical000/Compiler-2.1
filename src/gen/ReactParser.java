@@ -24,7 +24,8 @@ public class ReactParser extends Parser {
 		LEFTPAREN=31, RIGHTPAREN=32, LEFTBRACKET=33, RIGHTBRACKET=34, LEFTCURLY=35, 
 		RIGHTCURLY=36, LESSTHAN=37, GREATERTHAN=38, LESSEQUAL=39, GREATEREQUAL=40, 
 		EQ=41, NEQ=42, AND=43, OR=44, PLUSPLUS=45, MINUSMINUS=46, SQ=47, DQ=48, 
-		DOT=49, BOOL=50, ID=51, STRING=52, INT=53, DOUBLE=54;
+		DOT=49, BOOL=50, ID=51, STRING=52, INT=53, DOUBLE=54, PRINT_START=55, 
+		PRINT_CONTENT=56, PRINT_END=57;
 	public static final int
 		RULE_program = 0, RULE_importStatement = 1, RULE_export = 2, RULE_variableDeclaration = 3, 
 		RULE_functionDeclaration = 4, RULE_regularFunction = 5, RULE_callBackFunction = 6, 
@@ -55,8 +56,9 @@ public class ReactParser extends Parser {
 			"'if'", "'else'", "'for'", "'while'", "'return'", "'import'", "'export'", 
 			"'default'", "'from'", "'useState'", "'useEffect'", "'useRef'", "'null'", 
 			"'=>'", "'='", "'+'", "'-'", "'*'", "'/'", "'%'", "','", "';'", "':'", 
-			"'('", "')'", "'['", "']'", "'{'", "'}'", "'<'", "'>'", "'<='", "'>='", 
-			"'=='", "'!='", "'&&'", "'||'", "'++'", "'--'", "'''", "'\"'", "'.'"
+			"'('", null, "'['", "']'", "'{'", "'}'", "'<'", "'>'", "'<='", "'>='", 
+			"'=='", "'!='", "'&&'", "'||'", "'++'", "'--'", "'''", "'\"'", "'.'", 
+			null, null, null, null, null, "'console.log('"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -69,7 +71,7 @@ public class ReactParser extends Parser {
 			"RIGHTPAREN", "LEFTBRACKET", "RIGHTBRACKET", "LEFTCURLY", "RIGHTCURLY", 
 			"LESSTHAN", "GREATERTHAN", "LESSEQUAL", "GREATEREQUAL", "EQ", "NEQ", 
 			"AND", "OR", "PLUSPLUS", "MINUSMINUS", "SQ", "DQ", "DOT", "BOOL", "ID", 
-			"STRING", "INT", "DOUBLE"
+			"STRING", "INT", "DOUBLE", "PRINT_START", "PRINT_CONTENT", "PRINT_END"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -3305,7 +3307,7 @@ public class ReactParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u00016\u01ec\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u00019\u01ec\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+

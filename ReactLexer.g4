@@ -57,3 +57,12 @@ STRING: ( '"' ( ESCAPE | ~["\\] )* '"' ) | ( '\'' ( ESCAPE | ~['\\] )* '\'' );
 fragment ESCAPE: '\\' [\\"'];
 INT :   [0-9]+ ;
 DOUBLE :   [0-9]+ ('.' [0-9]+)? ;
+
+
+mode PrintMode;
+
+PRINT_START: 'console.log(' -> pushMode(PrintMode);
+
+PRINT_CONTENT: ~[)]+;
+
+PRINT_END: ')' -> popMode;
