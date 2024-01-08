@@ -242,6 +242,7 @@ public class ReactParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ImportStatementContext extends ParserRuleContext {
+		public Token source;
 		public TerminalNode IMPORT() { return getToken(ReactParser.IMPORT, 0); }
 		public TerminalNode STRING() { return getToken(ReactParser.STRING, 0); }
 		public List<TerminalNode> ID() { return getTokens(ReactParser.ID); }
@@ -375,7 +376,7 @@ public class ReactParser extends Parser {
 			}
 
 			setState(113);
-			match(STRING);
+			((ImportStatementContext)_localctx).source = match(STRING);
 			setState(115);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -462,14 +463,15 @@ public class ReactParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class VariableDeclarationContext extends ParserRuleContext {
-		public List<TerminalNode> ID() { return getTokens(ReactParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(ReactParser.ID, i);
-		}
+		public Token variable;
 		public TerminalNode EQUAL() { return getToken(ReactParser.EQUAL, 0); }
 		public TerminalNode VAR() { return getToken(ReactParser.VAR, 0); }
 		public TerminalNode CONST() { return getToken(ReactParser.CONST, 0); }
 		public TerminalNode LET() { return getToken(ReactParser.LET, 0); }
+		public List<TerminalNode> ID() { return getTokens(ReactParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(ReactParser.ID, i);
+		}
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
@@ -517,7 +519,7 @@ public class ReactParser extends Parser {
 				consume();
 			}
 			setState(124);
-			match(ID);
+			((VariableDeclarationContext)_localctx).variable = match(ID);
 			setState(125);
 			match(EQUAL);
 			setState(130);
@@ -636,8 +638,8 @@ public class ReactParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class RegularFunctionContext extends ParserRuleContext {
+		public Token functionName;
 		public TerminalNode FUNCTION() { return getToken(ReactParser.FUNCTION, 0); }
-		public TerminalNode ID() { return getToken(ReactParser.ID, 0); }
 		public TerminalNode LEFTPAREN() { return getToken(ReactParser.LEFTPAREN, 0); }
 		public TerminalNode RIGHTPAREN() { return getToken(ReactParser.RIGHTPAREN, 0); }
 		public TerminalNode LEFTCURLY() { return getToken(ReactParser.LEFTCURLY, 0); }
@@ -645,6 +647,7 @@ public class ReactParser extends Parser {
 			return getRuleContext(FunctionbodyContext.class,0);
 		}
 		public TerminalNode RIGHTCURLY() { return getToken(ReactParser.RIGHTCURLY, 0); }
+		public TerminalNode ID() { return getToken(ReactParser.ID, 0); }
 		public ParametersContext parameters() {
 			return getRuleContext(ParametersContext.class,0);
 		}
@@ -677,7 +680,7 @@ public class ReactParser extends Parser {
 			setState(139);
 			match(FUNCTION);
 			setState(140);
-			match(ID);
+			((RegularFunctionContext)_localctx).functionName = match(ID);
 			setState(141);
 			match(LEFTPAREN);
 			setState(143);

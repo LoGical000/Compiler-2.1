@@ -63,7 +63,7 @@ public class BaseVisitor extends ReactParserBaseVisitor {
                 importStatement.getImports().add(ctx.USEEFFECT(i).getText());
             }
         }
-        importStatement.setFrom(ctx.STRING().getText());
+        importStatement.setFrom(ctx.source.getText());
 
         Row row = new Row();
         row.setType("IMPORTFROM");
@@ -92,7 +92,7 @@ public class BaseVisitor extends ReactParserBaseVisitor {
         }
 
         //variable
-        variableDeclaration.setVariable(ctx.ID(0).getText());
+        variableDeclaration.setVariable(ctx.variable.getText());
 
 
         //value
@@ -138,7 +138,7 @@ public class BaseVisitor extends ReactParserBaseVisitor {
     public RegularFunction visitRegularFunction(ReactParser.RegularFunctionContext ctx) {
         RegularFunction regularFunction = new RegularFunction();
 
-        regularFunction.setFunctionName(ctx.ID().getText());
+        regularFunction.setFunctionName(ctx.functionName.getText());
         if (ctx.parameters()!=null)
             regularFunction.setParameters(visitParameters(ctx.parameters()));
         regularFunction.setFunctionBody(visitFunctionbody(ctx.functionbody()));

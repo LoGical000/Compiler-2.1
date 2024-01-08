@@ -5,16 +5,16 @@ options {tokenVocab=ReactLexer;}
 program : (importStatement)* (functionDeclaration | variableDeclaration)* export?;
 
 // 4 MAIN PARTS
-importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT|USESTATE|ID) COMMA?)* RIGHTCURLY? FROM? STRING SEMI?;
+importStatement: IMPORT ID? COMMA? LEFTCURLY? ((USEEFFECT | USESTATE | ID) COMMA?)* RIGHTCURLY? FROM? source=STRING SEMI?;
 
 export : EXPORT DEFAULT ID SEMI? ;
 
-variableDeclaration : (VAR | CONST | LET) ID EQUAL (value|functionDeclaration|array|ID) SEMI? ;
+variableDeclaration : (VAR | CONST | LET) variable=ID EQUAL (value|functionDeclaration|array|ID) SEMI? ;
 
 functionDeclaration : regularFunction | callBackFunction ;
 
 //FUNCTIONS
-regularFunction : FUNCTION ID LEFTPAREN parameters? RIGHTPAREN LEFTCURLY functionbody RIGHTCURLY ;
+regularFunction : FUNCTION functionName=ID LEFTPAREN parameters? RIGHTPAREN LEFTCURLY functionbody RIGHTCURLY ;
 
 callBackFunction : LEFTPAREN parameters?  RIGHTPAREN ARROW LEFTCURLY? functionbody RIGHTCURLY ;
 
