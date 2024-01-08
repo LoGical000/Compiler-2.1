@@ -25,9 +25,13 @@ public class FunctionBody {
 
     @Override
     public String toString() {
+       if(returnStatement!=null)
+           return "FunctionBody{" +
+                   "\n funcStatementList=" + funcStatementList +
+                   "\n returnStatement=" + returnStatement +
+                   "\n }";
         return "FunctionBody{" +
                 "\n funcStatementList=" + funcStatementList +
-                "\n returnStatement=" + returnStatement +
                 "\n }";
     }
 }
